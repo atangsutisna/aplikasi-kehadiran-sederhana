@@ -75,8 +75,8 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => '',
+	'hostname' => 'atangsutisna-absensi-sederhana-4423756',
+	'username' => 'atangsutisna',
 	'password' => '',
 	'database' => '',
 	'dbdriver' => 'mysqli',
