@@ -3,12 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Siswa extends CI_Controller {
     
-    /**
+    
     public function __construct() {
-        parent::__contruct();
-        $this->load->model('Siswa_model');
+        parent::__construct();
+        if (!$this->session->has_userdata('logged_in')) {
+        	$this->session->set_flashdata('not_authorize', 'Not Authorize');
+        	redirect('auth');
+        }
     }
-    **/
+    
 	public function index()
 	{
 		$this->load->model('siswa_model');

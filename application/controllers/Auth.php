@@ -14,21 +14,24 @@ class Auth extends CI_Controller {
     public function session() 
     {
         $this->load->helper(array('form', 'security'));
-        
-        $this->load->library('form_validation');
+        $this->load->library(array('form_validation'));
         
         $this->form_validation->set_rules('username', 'Username', 'callback_check_username');
         $this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('logged_in');
         } else {
+            $this->session->set_userdata(array(
+                    'logged_in' => TRUE
+                ));
             redirect('siswa');
         }
     }
 
     public function end_session() 
     {
-        
+        $this->session->unset_userdata('logged_in');   
+        redirect('auth');
     }
     
     public function check_username() {

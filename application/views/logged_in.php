@@ -66,6 +66,11 @@
     <div class="container">
       <?php echo form_open('auth/session', array('class' => 'form-signin')) ?>
         <h2 class="form-signin-heading">Silahkan Login</h2>
+        <?php 
+          if ($this->session->flashdata('not_authorize') !== NULL) {
+            echo "<p class='bg-danger'>Not Authorize</p>";
+          }
+        ?>
         <?php echo validation_errors("<p class='bg-danger'>", '</p>') ?>  
         <label for="inputEmail" class="sr-only">Username</label>
         <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
