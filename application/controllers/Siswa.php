@@ -11,10 +11,13 @@ class Siswa extends CI_Controller {
     **/
 	public function index()
 	{
-		//$this->load->view('welcome_message');
 		$this->load->model('siswa_model');
-		$result = $this->siswa_model->find_all();
-		var_dump($result);
+		$students = $this->siswa_model->find_all();
+		$data = array(
+		        'students' => $students,
+		        'content_view' => 'siswa/view'
+		    );
+		$this->load->view('main_view', $data);
 	}
 
 }
