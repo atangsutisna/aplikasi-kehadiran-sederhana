@@ -1,5 +1,5 @@
 <h1>Daftar Siswa</h1>
-<a href="#" class="button">Tambah Siswa</a>
+<?php echo anchor('student/new_form', 'Tambah Siswa Baru') ?>
 <table class="table">
     <thead>
         <tr>

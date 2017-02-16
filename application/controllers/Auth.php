@@ -24,7 +24,7 @@ class Auth extends CI_Controller {
             $this->session->set_userdata(array(
                     'logged_in' => TRUE
                 ));
-            redirect('siswa');
+            redirect('student');
         }
     }
 
