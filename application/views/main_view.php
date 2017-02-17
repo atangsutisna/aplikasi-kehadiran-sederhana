@@ -43,7 +43,7 @@
             <li><a href="#">Pengguna</a></li>              
             <li><a href="#">Staff</a></li>
             <li><a href="#about">Guru</a></li>
-            <li><a href="#contact">Siswa</a></li>
+            <li><?php echo anchor('student', 'Siswa') ?></li>
             <li><a href="#contact">Absensi Siswa</a></li>
             <li><a href="#contact">Absensi Guru</a></li>
             <li><a href="#contact">Laporan</a></li>

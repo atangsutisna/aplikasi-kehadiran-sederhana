@@ -17,14 +17,14 @@
     <label class="col-sm-2 control-label">NIS</label>
     <div class="col-sm-5">
       <input type="text" class="form-control" placeholder="Nomer Induk" name="nomor_induk" 
-      <?php echo set_value('nomor_induk') ?>>
+      value="<?php echo isset($siswa) ? $siswa->nomor_induk : ""?>">
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Nama lengkap</label>
     <div class="col-sm-5">
       <input type="text" class="form-control" placeholder="Nama lengkap" name="nama_lengkap"
-      <?php echo set_value('nama_lengkap') ?>>
+      value="<?php echo isset($siswa) ? $siswa->nama_lengkap : ""?>">
     </div>
   </div>
   <div class="form-group">
@@ -32,12 +32,28 @@
     <div class="col-sm-5">
         <div class="radio">
           <label>
-            <input type="radio" name="jenis_kelamin" value="1" <?php echo set_value('jenis_kelamin') ?>> Laki-laki
+            <?php 
+              $maleRadio = array(
+                  'name' => 'jenis_kelamin',
+                  'value' => 1,
+                  'checked' => isset($siswa) && $siswa->jenis_kelamin == 1 ? TRUE : FALSE
+                );
+              echo form_radio($maleRadio);
+            ?>
+            Laki-laki
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="jenis_kelamin" value="0" <?php echo set_value('jenis_kelamin') ?>> Perempuan
+              <?php 
+              $femaleRadio = array(
+                  'name' => 'jenis_kelamin',
+                  'value' => 0,
+                  'checked' => isset($siswa) && $siswa->jenis_kelamin == 0 ? TRUE : FALSE
+                );
+              echo form_radio($femaleRadio);
+            ?>
+            Perempuan
           </label>
         </div>
      </div>
@@ -45,9 +61,15 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">Alamat</label>
     <div class="col-sm-5">
-      <textarea class="form-control" rows="3" name="alamat">
-          <?php echo set_value('alamat') ?>
-      </textarea>
+      <?php
+        $streetAttr = array(
+            'class' => 'form-control',
+            'row' => '3',
+            'name' => 'alamat',
+            'vale' => isset($siswa) ? $siswa->alamat : ''
+          );
+        echo form_textarea($streetAttr);
+      ?>
     </div>
   </div>
   <div class="form-group">

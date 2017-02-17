@@ -18,7 +18,8 @@
             <td><?php echo $siswa->alamat ?></td>
             <td><?php echo $siswa->jenis_kelamin ? 'Laki-laki' : 'Perempuan' ?></td>
             <td>
-                <a href="#">Edit</a> | <a href="#">Hapus</a>
+                <?php echo anchor('student/edit_student/'. $siswa->id, 'Edit') ?> | 
+                <?php echo anchor('student/delete/'. $siswa->id, 'Delete') ?>
             </td>
         </tr>
         <?php endforeach; ?>

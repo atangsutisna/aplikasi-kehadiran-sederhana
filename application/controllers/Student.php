@@ -10,6 +10,7 @@ class Student extends CI_Controller {
         	$this->session->set_flashdata('not_authorize', 'Not Authorize');
         	redirect('auth');
         }
+        $this->load->library('form_validation');	
         $this->load->model('siswa_model');
     }
     
@@ -30,8 +31,6 @@ class Student extends CI_Controller {
 	
 	public function insert() 
 	{
-		$this->load->library('form_validation');	
-		
 		$this->form_validation->set_rules('nomor_induk', 'NIS', 'required|callback_check_id');
 		$this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
 		if ($this->form_validation->run() == TRUE) {
@@ -63,7 +62,10 @@ class Student extends CI_Controller {
 	
 	public function edit_student($id) 
 	{
-		$this->load->view('main_view', array('content_view' => 'student/form'));							
+		$toBeEdit = $this->siswa_model->find_one($id);
+		$this->load->view('main_view', array(
+			'content_view' => 'student/form',
+			'siswa' => $toBeEdit));	
 	}
 	
 	public function delete($id) 
