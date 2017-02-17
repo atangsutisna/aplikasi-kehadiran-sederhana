@@ -36,7 +36,7 @@ class Siswa_model extends CI_Model {
     
     public function check_nis_doest_exist($nis) 
     {
-        $result = $this->db->query('SELECT 1 AS result FROM siswa WHERE nis = ?', $nis);
+        $result = $this->db->query('SELECT 1 AS is_present FROM siswa WHERE nomor_induk = ?', $nis);
         return $result->row();
     }
 

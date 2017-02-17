@@ -32,7 +32,8 @@ class Student extends CI_Controller {
 	{
 		$this->load->library('form_validation');	
 		
-		$this->form_validation->set_rules('nomor_induk', 'NIS', 'required');
+		$this->form_validation->set_rules('nomor_induk', 'NIS', 'required|callback_check_id');
+		$this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			//insert to database
 			$data = array(
@@ -49,6 +50,16 @@ class Student extends CI_Controller {
 		}
 	}
 
+	public function check_id($nis) 
+	{
+		$result = $this->siswa_model->check_nis_doest_exist($nis);
+		if ($result->is_present) {
+			$this->form_validation->set_message('check_id', 'Duplicate {field}');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
 	
 	public function edit_student($id) 
 	{
