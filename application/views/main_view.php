@@ -43,7 +43,7 @@
             <li><?php echo anchor('user', 'Pengguna') ?></li>              
             <li><?php echo anchor('staff', 'Staff') ?></li>
             <li><?php echo anchor('student', 'Siswa') ?></li>
-            <li><?php echo anchor('studentgroup', 'Kelas') ?></li>
+            <li><?php echo anchor('student_group', 'Kelas') ?></li>
             <li><a href="#contact">Absensi Siswa</a></li>
             <li><a href="#contact">Absensi Guru</a></li>
             <li><a href="#contact">Laporan</a></li>
