@@ -1,4 +1,11 @@
 <h1>Daftar Siswa</h1>
+<?php 
+if ($this->session->flashdata('notif') != NULL) {
+    echo "<div class='alert alert-info'>";
+    echo $this->session->flashdata('notif');
+    echo "</div>";
+}
+?>
 <?php echo anchor('student/new_form', 'Tambah Siswa Baru') ?>
 <table class="table">
     <thead>
@@ -19,7 +26,8 @@
             <td><?php echo $siswa->jenis_kelamin ? 'Laki-laki' : 'Perempuan' ?></td>
             <td>
                 <?php echo anchor('student/edit_student/'. $siswa->id, 'Edit') ?> | 
-                <?php echo anchor('student/delete/'. $siswa->id, 'Delete') ?>
+                <?php echo anchor('student/delete/'. $siswa->id, 'Delete', array('onclick' =>  
+                "return confirm('Anda yakin akan menghapus ?');")) ?>
             </td>
         </tr>
         <?php endforeach; ?>

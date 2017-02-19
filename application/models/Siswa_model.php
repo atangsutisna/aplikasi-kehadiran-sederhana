@@ -39,6 +39,11 @@ class Siswa_model extends CI_Model {
         $result = $this->db->query('SELECT 1 AS is_present FROM siswa WHERE nomor_induk = ?', $nis);
         return $result->row();
     }
+    
+    public function delete($id)
+    {
+        $this->db->delete('siswa', array('id' => $id));
+    }
 
 }
 ?>

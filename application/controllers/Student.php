@@ -60,7 +60,14 @@ class Student extends CI_Controller {
 	
 	public function delete($id) 
 	{
+		if (!isset($id)) {
+			$this->session->set_flashdata('notif', 'ID must not be null');
+			redirect('student');
+		}
 		
+		$this->siswa_model->delete($id);
+		$this->session->set_flashdata('notif', '1 siswa telah dihapus');
+		redirect('student');
 	}
 
 	private function save($action) 
