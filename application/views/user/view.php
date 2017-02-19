@@ -1,4 +1,4 @@
-<h1>Daftar User</h1>
+<h1>Daftar Pengguna</h1>
 <?php 
 if ($this->session->flashdata('notif') != NULL) {
     echo "<div class='alert alert-info'>";
@@ -6,7 +6,7 @@ if ($this->session->flashdata('notif') != NULL) {
     echo "</div>";
 }
 ?>
-<?php echo anchor('user/new_form', 'Tambah User Baru') ?>
+<?php echo anchor('user/new_form', 'Tambah Pengguna Baru') ?>
 <table class="table">
     <thead>
         <tr>
@@ -20,7 +20,7 @@ if ($this->session->flashdata('notif') != NULL) {
     <tbody>
         <tr>
             <td>admin</td>
-            <td>Suprayatno</td>
+            <td>Sokrates</td>
             <td>ADMINISTRATOR</td>
             <td>aktif</td>
             <td>
@@ -28,8 +28,8 @@ if ($this->session->flashdata('notif') != NULL) {
             </td>
         </tr>
         <tr>
-            <td>tinatoon</td>
-            <td>TINA TOON</td>
+            <td>leonardodavinci</td>
+            <td>Leonardo Davinci</td>
             <td>SKRETARIS_SEKOLAH</td>
             <td>aktif</td>
             <td>

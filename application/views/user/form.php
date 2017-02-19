@@ -5,7 +5,7 @@
 ?>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <h4>FORM USER</h4>
+      <h4>FORM PENGGUNA</h4>
       <?php echo validation_errors() ?>
       <?php 
         if ($this->session->flashdata('notif') != NULL) {
