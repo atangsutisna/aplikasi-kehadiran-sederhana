@@ -40,10 +40,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Pengguna</a></li>              
-            <li><a href="#">Staff</a></li>
-            <li><a href="#about">Guru</a></li>
+            <li><?php echo anchor('user', 'Pengguna') ?></li>              
+            <li><?php echo anchor('staff', 'Staff') ?></li>
             <li><?php echo anchor('student', 'Siswa') ?></li>
+            <li><?php echo anchor('studentgroup', 'Kelas') ?></li>
             <li><a href="#contact">Absensi Siswa</a></li>
             <li><a href="#contact">Absensi Guru</a></li>
             <li><a href="#contact">Laporan</a></li>

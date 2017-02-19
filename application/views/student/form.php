@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label class="col-sm-2 control-label">NIS</label>
+    <label class="col-sm-2 control-label">ID</label>
     <div class="col-sm-5">
       <?php 
         echo form_hidden('id', isset($siswa) ? $siswa->id : '');

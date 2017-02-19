@@ -10,7 +10,7 @@ if ($this->session->flashdata('notif') != NULL) {
 <table class="table">
     <thead>
         <tr>
-            <th>NIS</th>
+            <th>ID</th>
             <th>Nama </th>
             <th>Alamat</th>
             <th>Jenis Kelamin</th>
