@@ -30,7 +30,7 @@ if ($this->session->flashdata('notif') != NULL) {
         <tr>
             <td>leonardodavinci</td>
             <td>Leonardo Davinci</td>
-            <td>SKRETARIS_SEKOLAH</td>
+            <td>SEKRETARIS_SEKOLAH</td>
             <td>aktif</td>
             <td>
                 <?php echo anchor('user/edit_user/' , 'Edit') ?>  
