@@ -31,22 +31,7 @@ class Student extends CI_Controller {
 	
 	public function insert() 
 	{
-		$this->form_validation->set_rules('nomor_induk', 'NIS', 'required|callback_check_id');
-		$this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
-		if ($this->form_validation->run() == TRUE) {
-			//insert to database
-			$data = array(
-					'nomor_induk' => $this->input->post('nomor_induk'),
-					'nama_lengkap' => $this->input->post('nama_lengkap'),
-					'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-					'alamat' => $this->input->post('alamat')
-				);
-			$this->siswa_model->insert($data);
-			$this->session->set_flashdata('notif', 'Data sudah disimpan');
-			redirect('student/new_form');
-		} else {
-			$this->load->view('main_view', array('content_view' => 'student/form'));						
-		}
+		$this->save('insert');
 	}
 
 	public function check_id($nis) 
@@ -68,11 +53,55 @@ class Student extends CI_Controller {
 			'siswa' => $toBeEdit));	
 	}
 	
+	public function update() 
+	{
+		$this->save('update');
+	}
+	
 	public function delete($id) 
 	{
 		
 	}
 
+	private function save($action) 
+	{
+		if ($action == 'insert') {
+			$this->form_validation->set_rules('nomor_induk', 'NIS', 'required|callback_check_id');	
+		}
+		
+		$this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			//insert to database
+			if ($action == 'insert') {
+				$data = array(
+					'nomor_induk' => $this->input->post('nomor_induk'),
+					'nama_lengkap' => $this->input->post('nama_lengkap'),
+					'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+					'alamat' => $this->input->post('alamat')
+				);
 
+				$this->session->set_flashdata('notif', 'Data sudah disimpan');
+				$this->siswa_model->insert($data);				
+				redirect('student/new_form');
+			} 
+			
+			if ($action == 'update') {
+				$data = array(
+					'nama_lengkap' => $this->input->post('nama_lengkap'),
+					'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+					'alamat' => $this->input->post('alamat')
+				);
+
+				$this->session->set_flashdata('notif', 'Data sudah diupdate');
+				$this->siswa_model->update($this->input->post('id'), 
+				$data);				
+				redirect('student/edit_student/'. $this->input->post('id'));
+			}
+
+			
+		} else {
+			$this->load->view('main_view', array('content_view' => 'student/form'));						
+		}
+	}
 
 }

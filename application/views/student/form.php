@@ -1,5 +1,8 @@
 <p>&nbsp;</p>
-<?php echo form_open("student/insert", array("class" => "form-horizontal")) ?>
+<?php 
+  $formAttr = array("class" => "form-horizontal");
+  echo !isset($siswa) ? form_open("student/insert", $formAttr) : form_open("student/update", $formAttr);
+?>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <h4>FORM SISWA</h4>
@@ -16,8 +19,12 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">NIS</label>
     <div class="col-sm-5">
+      <?php 
+        echo form_hidden('id', isset($siswa) ? $siswa->id : '');
+      ?>
       <input type="text" class="form-control" placeholder="Nomer Induk" name="nomor_induk" 
-      value="<?php echo isset($siswa) ? $siswa->nomor_induk : ""?>">
+      value="<?php echo isset($siswa) ? $siswa->nomor_induk : ""?>"
+      <?php echo isset($siswa) ? 'disabled' : '' ?>>
     </div>
   </div>
   <div class="form-group">
@@ -66,7 +73,7 @@
             'class' => 'form-control',
             'row' => '3',
             'name' => 'alamat',
-            'vale' => isset($siswa) ? $siswa->alamat : ''
+            'value' => isset($siswa) ? $siswa->alamat : ''
           );
         echo form_textarea($streetAttr);
       ?>
