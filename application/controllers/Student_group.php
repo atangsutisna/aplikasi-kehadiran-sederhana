@@ -21,5 +21,10 @@ class Student_Group extends CI_Controller {
 		$this->load->view('main_view', array('content_view' => 'studentgroup/form'));			
 	}
 
+    public function new_member() 
+	{
+		$this->load->view('main_view', array('content_view' => 'studentgroup/form_member'));			
+	}
+
     
 }
