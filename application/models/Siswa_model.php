@@ -44,6 +44,6 @@ class Siswa_model extends CI_Model {
     {
         $this->db->delete('siswa', array('id' => $id));
     }
-
+    
 }
 ?>

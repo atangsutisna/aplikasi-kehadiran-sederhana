@@ -1,11 +1,11 @@
 <p>&nbsp;</p>
 <?php 
   $formAttr = array("class" => "form-horizontal");
-  echo form_open("student_group/insert_new_member", $formAttr);
+  echo !isset($stdgroup) ? form_open("student_presence/show_group", $formAttr) : form_open("student_presence/new_presence", $formAttr)
 ?>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <h4>FORM ABSENSI SISWA</h4>
+      <h4>FORM FILTER SISWA</h4>
       <?php echo validation_errors() ?>
       <?php 
         if ($this->session->flashdata('notif') != NULL) {
@@ -20,11 +20,13 @@
     <label class="col-sm-2 control-label">Pilih Tahun Ajaran</label>
     <div class="col-sm-4">
     <?php
-        $tahun_ajaran = array(
-            '0' => 'Tahun Ajaran',
-            '1' => '2016/2017'
+        $opt_thnajr = array(
+            '0' => 'Tahun Ajaran'
           );
-            echo form_dropdown('tahun_ajaran', $tahun_ajaran, '0');
+        foreach ($tahun_ajaran as $value) {
+            $opt_thnajr[$value->tahun_ajaran] = $value->tahun_ajaran;
+        }
+        echo form_dropdown('tahun_ajaran', $opt_thnajr, '0', array('onchange' => 'this.form.submit()'));
         ?>
     </div>
   </div>  
@@ -32,23 +34,34 @@
     <label class="col-sm-2 control-label">Kelas</label>
     <div class="col-sm-4">
     <?php
-        $students = array(
-            '0' => 'Pilih Nama Kelas',
-            '1' => 'I A',
-            '2' => 'I B',
-            '3' => 'II A',
-            '4' => 'II B',
-          );
-            echo form_dropdown('id_staff', $students, '0');
+        $groups = array();
+        if (isset($stdgroup)) {
+            foreach ($stdgroup as $value) {
+               $groups[$value->id] = $value->nama_kelas . " (". $value->tahun_ajaran . ")";
+            } 
+        }
+        echo form_dropdown('id_kelas', $groups, '0');
         ?>
     </div>
   </div>  
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary">Cari</button>
+        <button type="submit" class="btn btn-primary" <?php echo !isset($stdgroup) ? "disabled" : ""?>>
+          Cari
+        </button>
     </div>
   </div>
 <?php echo form_close() ?>
+<br/>
+<php echo form_open('#') ?>
+<div class="row">
+    <div class="pull-right">
+        <button type="submit" class="btn btn-primary">
+            Simpan
+        </button>
+    </div>
+</div>
+<br><br>
 <table class="table">
     <tdead>
         <tr>
@@ -59,69 +72,24 @@
         </tr>
     </tdead>
     <tbody>
+        <?php foreach ($group_members as $member) : ?>
         <tr>
-            <td>1000001</td>
-            <td>Fajar Nugraha</td>            
+            <td><?php echo $member->nis ?></td>
+            <td><?php echo $member->nama_lengkap ?></td>            
             <td>
                 <label>
-                    <input type="checkbox" name="status[]"/> Hadir/Tidak Hadir
+                    <input type="checkbox" name="status[". $member->id. "]"/> Hadir/Tidak Hadir
                 </label>
             </td>
             <td>
-                <select>
+                <select name="keterangan[". $member->id . "]">
                     <option value="tidak ada kabar">Tidak ada kabar</option>
                     <option value="sakit">Sakit</option>
                     <option value="ijin">Ijin</option>                    
                 </select>
             </td>
         </tr>
-        <tr>
-            <td>1000002</td>
-            <td>Eki Kurniawan</td>            
-            <td>
-                <label>
-                    <input type="checkbox" name="status[]"/> Hadir/Tidak Hadir
-                </label>
-            </td>
-            <td>
-                <select>
-                    <option value="tidak ada kabar">Tidak ada kabar</option>
-                    <option value="sakit">Sakit</option>
-                    <option value="ijin">Ijin</option>                    
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>1000003</td>
-            <td>Rosa Sukmawati</td>            
-            <td>
-                <label>
-                    <input type="checkbox" name="status[]"/> Hadir/Tidak Hadir
-                </label>
-            </td>
-            <td>
-                <select>
-                    <option value="tidak ada kabar">Tidak ada kabar</option>
-                    <option value="sakit">Sakit</option>
-                    <option value="ijin">Ijin</option>                    
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>1000004</td>
-            <td>Bela Latjuba</td>            
-            <td>
-                <label>
-                    <input type="checkbox" name="status[]"/> Hadir/Tidak Hadir
-                </label>
-            </td>
-            <td>
-                <select>
-                    <option value="tidak ada kabar">Tidak ada kabar</option>
-                    <option value="sakit">Sakit</option>
-                    <option value="ijin">Ijin</option>                    
-                </select>
-            </td>
-        </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
+<?php echo form_close() ?>

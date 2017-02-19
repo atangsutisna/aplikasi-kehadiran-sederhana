@@ -8,6 +8,7 @@ if ($this->session->flashdata('notif') != NULL) {
 ?>
 <?php echo anchor('staff/new_form', 'Tambah Staff Baru') ?>
 <form>
+    Filter berdasarkan jabatan
     <?php
     $positions = array(
         '0' => 'Pilih Jabatan',
@@ -17,7 +18,7 @@ if ($this->session->flashdata('notif') != NULL) {
       );
     echo form_dropdown('id_jabatan', $positions, '0');
     ?>
-    <button type="submit" class="btn btn-primary">Cari</button>
+    <button type="submit" class="btn btn-primary">Tampilkan</button>
 </form>
 <table class="table">
     <thead>
