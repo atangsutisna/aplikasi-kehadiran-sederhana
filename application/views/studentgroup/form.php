@@ -34,12 +34,10 @@
     <label class="col-sm-2 control-label">Wali Kelas</label>
     <div class="col-sm-4">
       <?php
-        $positions = array(
-            '0' => 'Pilih Wali Kelas',
-            '1' => 'Albert Einsten',
-            '2' => 'Leonardo Davinci',
-            '3' => 'Socrates',
-          );
+        $positions = array('0' => 'Pilih Wali Kelas');
+        foreach ($staffs as $staff) {
+          $positions[$staff->id] = $staff->nama;
+        }
         echo form_dropdown('id_staff', $positions, '0');
       ?>      
     </div>
