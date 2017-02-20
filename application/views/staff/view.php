@@ -38,7 +38,7 @@ if ($this->session->flashdata('notif') != NULL) {
             <td>-</td>
             <td><?php echo $staff->pendidikan_terakhir ?></td>
             <td>
-                <?php echo anchor('staff/edit_staff/'. $staff->id, 'Edit') ?> | 
+                <?php echo anchor('staff/edit/'. $staff->id, 'Edit') ?> | 
                 <?php echo anchor('staff/delete/'. $staff->id, 'Delete', array('onclick' =>  
                 "return confirm('Anda yakin akan menghapus ?');")) ?>
             </td>
