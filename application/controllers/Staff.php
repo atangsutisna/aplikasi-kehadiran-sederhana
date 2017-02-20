@@ -11,7 +11,7 @@ class Staff extends CI_Controller {
         	redirect('auth');
         }
         $this->load->library('form_validation');	
-        $this->load->model('staff_model');
+        $this->load->model(array('staff_model', 'position_model'));
     }
 	
 	public function index()
@@ -25,7 +25,7 @@ class Staff extends CI_Controller {
 	
 	public function new_form() 
 	{
-		$this->load->model('position_model');
+		
 		$data = array(
 				'positions' => $this->position_model->find_all(),
 				'staffs' => $this->staff_model->find_all(),
@@ -34,6 +34,17 @@ class Staff extends CI_Controller {
 		
 		$this->load->view('main_view', $data);			
 	}
+	
+	public function edit($id) 
+	{
+		$data = array(
+				'positions' => $this->position_model->find_all(),
+				'staff' => $this->staff_model->find_one($id),
+		        'content_view' => 'staff/form'
+		    );
+		
+		$this->load->view('main_view', $data);			
+	}	
 
 
 }    
