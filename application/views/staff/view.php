@@ -35,7 +35,7 @@ if ($this->session->flashdata('notif') != NULL) {
         <tr>
             <td><?php echo $staff->nip ?></td>
             <td><?php echo $staff->nama ?></td>
-            <td>-</td>
+            <td><?php echo $staff->nama_jabatan ?></td>
             <td><?php echo $staff->pendidikan_terakhir ?></td>
             <td>
                 <?php echo anchor('staff/edit/'. $staff->id, 'Edit') ?> | 

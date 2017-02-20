@@ -1,7 +1,7 @@
 <p>&nbsp;</p>
 <?php 
   $formAttr = array("class" => "form-horizontal");
-  echo !isset($staff) ? form_open("student/insert", $formAttr) : form_open("student/update", $formAttr);
+  echo !isset($staff) ? form_open("staff/insert", $formAttr) : form_open("staff/update", $formAttr);
 ?>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -22,15 +22,15 @@
       <?php 
         echo form_hidden('id', isset($staff) ? $staff->id : '');
       ?>
-      <input type="text" class="form-control" placeholder="NIP jika pns" name="id_staff" 
-      value="<?php echo isset($staff) ? $staff->id : ""?>"
+      <input type="text" class="form-control" placeholder="NIP jika pns" name="nip" 
+      value="<?php echo isset($staff) ? $staff->nip : ""?>"
       <?php echo isset($staff) ? 'disabled' : '' ?>>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Nama lengkap</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" placeholder="Nama lengkap" name="nama_lengkap"
+      <input type="text" class="form-control" placeholder="Nama lengkap" name="nama"
       value="<?php echo isset($staff) ? $staff->nama : ""?>">
     </div>
   </div>
@@ -101,7 +101,7 @@
           <label>
             <?php 
               $s1Radio = array(
-                  'name' => 'pendidikan',
+                  'name' => 'pendidikan_terakhir',
                   'value' => 'S1',
                   'checked' => isset($staff) && $staff->pendidikan_terakhir == 'S1' ? TRUE : FALSE
                 );
@@ -114,7 +114,7 @@
           <label>
             <?php 
               $smaRadio = array(
-                  'name' => 'pendidikan',
+                  'name' => 'pendidikan_terakhir',
                   'value' => 'SMA',
                   'checked' => isset($staff) && $staff->pendidikan_terakhir == 'SMA' ? TRUE : FALSE
                 );
@@ -127,7 +127,7 @@
           <label>
             <?php 
               $smpRadio = array(
-                  'name' => 'pendidikan',
+                  'name' => 'pendidikan_terakhir',
                   'value' => 'SMP',
                   'checked' => isset($staff) && $staff->pendidikan_terakhir == 'SMP' ? TRUE : FALSE
                 );
@@ -140,7 +140,7 @@
           <label>
             <?php 
               $sdRadio = array(
-                  'name' => 'pendidikan',
+                  'name' => 'pendidikan_terakhir',
                   'value' => 'SD',
                   'checked' => isset($staff) && $staff->pendidikan_terakhir == 'SD' ? TRUE : FALSE
                 );
