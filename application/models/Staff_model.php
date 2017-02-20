@@ -37,5 +37,12 @@ class Staff_model extends CI_Model
         $result = $this->db->get('staff');
         return $result->row();
     }
+    
+    public function check_nip_doest_exist($nip) 
+    {
+        $result = $this->db->query('SELECT 1 AS is_present FROM staff WHERE nip = ?', $nip);
+        return $result->row();
+    }
+
 
 }

@@ -35,6 +35,42 @@ class Staff extends CI_Controller {
 		$this->load->view('main_view', $data);			
 	}
 	
+	public function insert() 
+	{
+		$this->form_validation->set_rules('nip', 'NIP', 'required|callback_check_id');	
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$data = array(
+				'nip' => $this->input->post('nip'),
+				'nama' => $this->input->post('nama'),
+				'alamat' => $this->input->post('alamat'),
+				'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+				'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
+				'id_jabatan' => $this->input->post('id_jabatan'),
+			);
+			$this->staff_model->insert($data);
+			$this->session->set_flashdata('notif', 'Data sudah disimpan');
+			redirect('staff/new_form');
+		} else {
+			$data = array(
+				'positions' => $this->position_model->find_all(),
+		        'content_view' => 'staff/form'
+		    );
+			$this->load->view('main_view', $data);			
+		}
+	}
+	
+	public function check_id($nip) 
+	{
+		$result = $this->staff_model->check_nip_doest_exist($nip);
+		if ($result->is_present) {
+			$this->form_validation->set_message('check_id', 'Duplicate {field}');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	public function edit($id) 
 	{
 		$data = array(
