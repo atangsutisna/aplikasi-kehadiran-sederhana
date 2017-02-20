@@ -31,28 +31,18 @@ if ($this->session->flashdata('notif') != NULL) {
         </tr>
     </thead>
     <tbody>
+        <?php foreach ($staffs as $staff) : ?>
         <tr>
-            <td>1274659839393</td>
-            <td>H.Suudi Spd</td>
-            <td>Guru</td>
-            <td>S1</td>
+            <td><?php echo $staff->nip ?></td>
+            <td><?php echo $staff->nama ?></td>
+            <td>-</td>
+            <td><?php echo $staff->pendidikan_terakhir ?></td>
             <td>
-                <?php echo anchor('staff/edit_student/#', 'Edit') ?> | 
-                <?php echo anchor('staff/delete/#', 'Delete', array('onclick' =>  
+                <?php echo anchor('staff/edit_staff/'. $staff->id, 'Edit') ?> | 
+                <?php echo anchor('staff/delete/'. $staff->id, 'Delete', array('onclick' =>  
                 "return confirm('Anda yakin akan menghapus ?');")) ?>
             </td>
         </tr>
-        <tr>
-            <td>1274659839393</td>
-            <td>H.Suudi Spd</td>
-            <td>Guru</td>
-            <td>S1 Universitas Indonesia</td>
-            <td>
-                <?php echo anchor('staff/edit_student/#', 'Edit') ?> | 
-                <?php echo anchor('staff/delete/#', 'Delete', array('onclick' =>  
-                "return confirm('Anda yakin akan menghapus ?');")) ?>
-            </td>
-        </tr>
-
+        <?php endforeach; ?>
     </tbody>
 </table>

@@ -83,13 +83,14 @@
     <label class="col-sm-2 control-label">Jabatan</label>
     <div class="col-sm-5">
       <?php
-        $positions = array(
+        $postOption = array(
             '0' => 'Pilih Jabatan',
-            'kepsek' => 'Kepala Sekolah',
-            'wakepsek' => 'Wakil Kepala Sekolah',
-            'guru' => 'Guru',
-          );
-        echo form_dropdown('id_jabatan', $positions, '0');
+        );
+        foreach ($positions as $item) {
+          $postOption[$item->id] = $item->nama_jabatan;
+        } 
+        
+        echo form_dropdown('id_jabatan', $postOption, '0');
       ?>
     </div>
   </div>
