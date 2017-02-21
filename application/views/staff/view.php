@@ -7,19 +7,17 @@ if ($this->session->flashdata('notif') != NULL) {
 }
 ?>
 <?php echo anchor('staff/new_form', 'Tambah Staff Baru') ?>
-<form>
+<?php echo form_open('staff/filter') ?>
     Filter berdasarkan jabatan
     <?php
-    $positions = array(
-        '0' => 'Pilih Jabatan',
-        'kepsek' => 'Kepala Sekolah',
-        'wakepsek' => 'Wakil Kepala Sekolah',
-        'guru' => 'Guru',
-      );
-    echo form_dropdown('id_jabatan', $positions, '0');
+    $posOpt = array('0' => 'Pilih Jabatan');
+    foreach ($positions as $item) {
+        $posOpt[$item->id] = $item->nama_jabatan;
+    }
+    echo form_dropdown('id_jabatan', $posOpt, isset($selected_position_id) ? $selected_position_id : '0');
     ?>
     <button type="submit" class="btn btn-primary">Tampilkan</button>
-</form>
+<?php echo form_close() ?>
 <table class="table">
     <thead>
         <tr>

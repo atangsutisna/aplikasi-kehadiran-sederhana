@@ -17,12 +17,24 @@ class Staff extends CI_Controller {
 	public function index()
 	{
 		$data = array(
-				'staffs' => $this->staff_model->find_all(),
-		        'content_view' => 'staff/view'
-		    );
+			'positions' => $this->position_model->find_all(),
+			'staffs' => $this->staff_model->find_all(),
+	        'content_view' => 'staff/view'
+	    );
 		$this->load->view('main_view', $data);
 	}
 	
+	public function filter() 
+	{
+		$id_position = $this->input->post('id_jabatan');
+		$data = array(
+			'selected_position_id' => $this->input->post('id_jabatan'),
+			'positions' => $this->position_model->find_all(),
+			'staffs' => $this->staff_model->find_all_by_position($id_position),
+	        'content_view' => 'staff/view'
+		);
+		$this->load->view('main_view', $data);
+	}
 	public function new_form() 
 	{
 		
