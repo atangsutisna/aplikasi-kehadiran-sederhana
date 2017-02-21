@@ -32,7 +32,7 @@ class User_model extends CI_Model {
 
     public function check_username($username) 
     {
-        $result = $this->db->query("SELECT 1 FROM pengguna WHERE username = ?", array($username));
+        $result = $this->db->query("SELECT 1 AS is_present FROM pengguna WHERE username = ?", array($username));
         return $result->row();
     }
     

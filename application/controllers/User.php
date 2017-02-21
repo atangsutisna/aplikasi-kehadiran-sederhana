@@ -30,7 +30,7 @@ class User extends CI_Controller {
 	
 	public function insert() 
 	{
-	    $this->form_validation->set_rules('username', 'Username', 'required');
+	    $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username');
 	    $this->form_validation->set_rules('id_pengguna', 'Nama Staff', 'required');
 	    $this->form_validation->set_rules('password', 'Password', 'required');
 	    $this->form_validation->set_rules('peran', 'Peran', 'required');
@@ -54,6 +54,17 @@ class User extends CI_Controller {
 	    }
 	}
 	
+	public function check_username($username) 
+	{
+		$result = $this->user_model->check_username($username);
+		if ($result->is_present) {
+			$this->form_validation->set_message('check_username', 'Duplicate {field}');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	public function check_password_equal()
 	{
 	    $password = $this->input->post('password');
