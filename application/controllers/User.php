@@ -79,7 +79,30 @@ class User extends CI_Controller {
 	
 	public function update() 
 	{
+	    /**
+	    $this->form_validation->set_rules('username', 'Username', 'required');
+	    $this->form_validation->set_rules('id_pengguna', 'Nama Staff', 'required');
+	    $this->form_validation->set_rules('peran', 'Peran', 'required');
 	    
+	    
+	    if ($this->form_validation->run() == TRUE) {
+    	    $data = array(
+    	        'id_pengguna' => $this->input->post('id_pengguna'),
+    	        'peran' => $this->input->post('peran'),
+    	    );    
+    	    $username = $this->input->post('username');
+    	    $this->user_model->update($username, $data);
+    	    redirect('user/new_form');
+	    } else {
+	        $id = $this->input->post('id_pengguna');
+    	    $data = array(
+    	        'user' => $this->user_model->find_one($id),
+    	        'staffs' => $this->staff_model->find_all(),
+    	        'content_view' => 'user/form'
+    	    );
+    		$this->load->view('main_view', $data);			
+	    } **/
+	    echo "Maaf, fasilistas ini masih dalam tahap Delevelopment";
 	}
 	
 	public function edit($id) 

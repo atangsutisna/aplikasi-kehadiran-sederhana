@@ -30,6 +30,13 @@ class User_model extends CI_Model {
         $this->db->insert('pengguna');
     }
 
+    public function update($username, $data) 
+    {
+        $this->db->set($data);
+        $this->db->where('username', $username);
+        $this->db->update('pengguna');
+    }
+
     public function check_username($username) 
     {
         $result = $this->db->query("SELECT 1 AS is_present FROM pengguna WHERE username = ?", array($username));
