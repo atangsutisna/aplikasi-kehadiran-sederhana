@@ -53,12 +53,17 @@
   </div>
 <?php echo form_close() ?>
 <br/>
-<php echo form_open('#') ?>
+<?php echo !empty($group_members) ? form_open('student_presence/insert') : form_open('#')?>
 <div class="row">
-    <div class="pull-right">
-        <button type="submit" class="btn btn-primary">
-            Simpan
-        </button>
+    <div class="col-lg-5">
+        <?php echo isset($group_name) ? '<h3>Absensi Kelas: '. $group_name->nama_kelas . ' '. $group_name->tahun_ajaran . '</h3>' : '' ?>        
+    </div>
+    <div class="col-lg-7">
+        <div class="pull-right">
+            <button type="submit" class="btn btn-primary" <?php echo empty($group_members) ? 'disabled' : ''?>>
+                Simpan
+            </button>
+        </div>
     </div>
 </div>
 <br><br>
@@ -67,7 +72,6 @@
         <tr>
             <th>NIS</th>
             <th>Nama Siswa</th>            
-            <th>Status</th>
             <th>Keterangan</th>
         </tr>
     </tdead>
@@ -79,23 +83,44 @@
             <td>
                 <label>
                     <?php 
-                        $ckdata = array(
-                            'name' => 'status['. $member->id_siswa . ']'
+                        $hRadio = array(
+                          'name' => 'keterangan['.$member->id_siswa.']',
+                          'value' => 'HADIR',
                         );
-                        echo form_checkbox($ckdata);
+                        echo form_radio($hRadio);
                     ?>
-                    Hadir/Tidak Hadir
+                    Hadir
                 </label>
-            </td>
-            <td>
-                <?php 
-                    $descOpt = array(
-                        'TIDAK ADA KABAR' => 'Tidak ada kabar',
-                        'SAKIT' => 'SAKIT',
-                        'IJIN' => 'IJIN',
-                    );
-                    echo form_dropdown('keterangan['. $member->id_siswa . ']', $descOpt);
-                ?>
+                <label>
+                    <?php 
+                        $thRadio = array(
+                          'name' => 'keterangan['.$member->id_siswa.']',
+                          'value' => 'TIDAK HADIR',
+                        );
+                        echo form_radio($thRadio);
+                    ?>
+                    Tidak Hadir
+                </label>
+                <label>
+                    <?php 
+                        $sRadio = array(
+                          'name' => 'keterangan['.$member->id_siswa.']',
+                          'value' => 'SAKIT',
+                        );
+                        echo form_radio($sRadio);
+                    ?>
+                    SAKIT
+                </label>
+                <label>
+                    <?php 
+                        $iRadio = array(
+                          'name' => 'keterangan['.$member->id_siswa.']',
+                          'value' => 'IJIN',
+                        );
+                        echo form_radio($iRadio);
+                    ?>
+                    IJIN
+                </label>
             </td>
         </tr>
         <?php endforeach; ?>

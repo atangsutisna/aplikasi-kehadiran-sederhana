@@ -45,7 +45,11 @@ class User_model extends CI_Model {
     
     public function find_by_username($username) 
     {
-        $result = $this->db->query("SELECT * FROM pengguna WHERE username = ?", array($username));
+        $result = $this->db->query("
+            SELECT staff.nama, pengguna.* FROM pengguna 
+            INNER JOIN staff 
+            ON (pengguna.id_pengguna = staff.id)
+            WHERE username = ?", array($username));
         return $result->row();
     }
     

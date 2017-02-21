@@ -38,6 +38,7 @@ class Student_presence extends CI_Controller {
         $post_tahun_ajaran = $this->input->post('tahun_ajaran');
         $post_id_kelas = $this->input->post('id_kelas');
         $data = array(
+            'group_name' => $this->stdgroup_model->find_one($post_id_kelas),
             'stdgroup' => $this->stdgroup_model->find_by_tahun_ajaran($post_tahun_ajaran),
             'tahun_ajaran' => $this->stdgroup_model->find_all_tahun_ajaran(),
             'group_members' => $this->stdgroup_model->find_all_member($post_id_kelas),
@@ -47,7 +48,25 @@ class Student_presence extends CI_Controller {
 		$this->load->view('main_view', $data);
     }
     
-    
+    public function insert() 
+    {
+        $this->load->model('presence_model');
+        $postData = $this->input->post('keterangan');
+        $data = array();
+        foreach($postData as $idx => $value) {
+            $row = array(
+                'id_siswa' => $idx,
+                'keterangan' => $value,
+                'id_operator' => $this->session->userdata('staff_id'),
+                'tanggal' => date('Y/m/d')
+            );
+            
+            $data[] = $row;
+        }
+        $this->presence_model->insert_into('kehadiran_siswa', $data);
+        $this->session->set_flashdata('notif', 'Data sudah disimpan');
+        redirect('student_presence');
+    }
     
 }
 

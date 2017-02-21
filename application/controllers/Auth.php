@@ -21,8 +21,14 @@ class Auth extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('logged_in');
         } else {
+            $this->load->model('user_model');
+            $username = $this->input->post('username');
+            $user = $this->user_model->find_by_username($username);
             $this->session->set_userdata(array(
-                    'logged_in' => TRUE
+                    'logged_in' => TRUE,
+                    'staff_id' => $user->id_pengguna,
+                    'role' => $user->peran,
+                    'staff_name' => $user->nama
                 ));
             redirect('student');
         }
@@ -30,7 +36,10 @@ class Auth extends CI_Controller {
 
     public function end_session() 
     {
-        $this->session->unset_userdata('logged_in');   
+        $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('staff_id');           
+        $this->session->unset_userdata('role');   
+        $this->session->unset_userdata('staff_name');   
         redirect('auth');
     }
     
