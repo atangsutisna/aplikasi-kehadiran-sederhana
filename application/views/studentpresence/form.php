@@ -78,7 +78,12 @@
     <tbody>
         <?php foreach ($group_members as $member) : ?>
         <tr>
-            <td><?php echo $member->nomor_induk ?></td>
+            <td>
+                <?php 
+                    echo form_hidden('id_kehadiran['. $member->id_siswa . ']', $member->id_kehadiran != NULL ? $member->id_kehadiran : NULL);
+                    echo $member->nomor_induk 
+                ?>
+            </td>
             <td><?php echo $member->nama_lengkap ?></td>            
             <td>
                 <label>
@@ -86,6 +91,7 @@
                         $hRadio = array(
                           'name' => 'keterangan['.$member->id_siswa.']',
                           'value' => 'HADIR',
+                          'checked' => $member->keterangan == 'HADIR' ? TRUE : FALSE
                         );
                         echo form_radio($hRadio);
                     ?>
@@ -96,6 +102,7 @@
                         $thRadio = array(
                           'name' => 'keterangan['.$member->id_siswa.']',
                           'value' => 'TIDAK HADIR',
+                          'checked' => $member->keterangan == 'TIDAK HADIR' ? TRUE : FALSE
                         );
                         echo form_radio($thRadio);
                     ?>
@@ -106,6 +113,7 @@
                         $sRadio = array(
                           'name' => 'keterangan['.$member->id_siswa.']',
                           'value' => 'SAKIT',
+                          'checked' => $member->keterangan == 'SAKIT' ? TRUE : FALSE
                         );
                         echo form_radio($sRadio);
                     ?>
@@ -116,6 +124,7 @@
                         $iRadio = array(
                           'name' => 'keterangan['.$member->id_siswa.']',
                           'value' => 'IJIN',
+                          'checked' => $member->keterangan == 'IJIN' ? TRUE : FALSE                          
                         );
                         echo form_radio($iRadio);
                     ?>
