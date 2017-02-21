@@ -9,7 +9,12 @@ class Stdgroup_model extends CI_Model
     
     public function find_all() 
     {
-        $query = $this->db->get('kelas');
+        $query = $this->db->query('
+            SELECT kelas.*, staff.nama AS wali_kelas FROM kelas
+            LEFT JOIN staff 
+            ON kelas.id_wali_kelas = staff.id
+            ORDER BY kelas.id DESC;
+        ');
         return $query->result();
     }
     

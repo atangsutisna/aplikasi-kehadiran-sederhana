@@ -18,12 +18,16 @@ if ($this->session->flashdata('notif') != NULL) {
         </tr>
     </tdead>
     <tbody>
-        <?php foreach ($groups as $kelas) : ?>
+        <?php foreach ($groups as $group) : ?>
         <tr>
-            <td><?php echo $kelas->tahun_ajaran ?></td>
-            <td><?php echo $kelas->nama_kelas ?></td>
-            <td>-</td>            
-            <td><?php echo anchor('student_group/new_member', 'Tambah Anggota') ?></td>
+            <td><?php echo $group->tahun_ajaran ?></td>
+            <td><?php echo $group->nama_kelas ?></td>
+            <td><?php echo $group->wali_kelas == null ? 'Belum ada' : $group->wali_kelas ?></td>       
+            <td>0</td>
+            <td>
+                <?php echo anchor('student_group/edit/'. $group->id, 'Edit') ?> | 
+                <?php echo anchor('student_group/new_member', 'Tambah Anggota') ?>
+            </td>
         </tr>
         <?php endforeach; ?>
     </tbody>

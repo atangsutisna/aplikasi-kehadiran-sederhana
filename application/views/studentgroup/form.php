@@ -1,7 +1,7 @@
 <p>&nbsp;</p>
 <?php 
   $formAttr = array("class" => "form-horizontal");
-  echo !isset($kelas) ? form_open("student/insert", $formAttr) : form_open("student/update", $formAttr);
+  echo !isset($group) ? form_open("student_group/insert", $formAttr) : form_open("student_group/update", $formAttr);
 ?>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -19,15 +19,18 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">Nama</label>
     <div class="col-sm-4">
+      <?php 
+        echo form_hidden('id', issset($group) ? $group->id : '');
+      ?>
       <input type="text" class="form-control" placeholder="Tulis nama kelas" name="nama_kelas" 
-      value="<?php echo isset($kelas) ? $kelas->nama_kelas : ""?>">
+      value="<?php echo isset($group) ? $group->nama_kelas : ""?>">
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Tahun Ajaran</label>
     <div class="col-sm-2">
       <input type="text" class="form-control" placeholder="Contoh 2016/2017" name="tahun_ajaran" 
-      value="<?php echo isset($kelas) ? $kelas->tahun_ajaran : ""?>">
+      value="<?php echo isset($group) ? $group->tahun_ajaran : ""?>">
     </div>
   </div>  
   <div class="form-group">
@@ -38,7 +41,7 @@
         foreach ($staffs as $staff) {
           $positions[$staff->id] = $staff->nama;
         }
-        echo form_dropdown('id_staff', $positions, '0');
+        echo form_dropdown('id_wali_kelas', $positions, '0');
       ?>      
     </div>
   </div>  
