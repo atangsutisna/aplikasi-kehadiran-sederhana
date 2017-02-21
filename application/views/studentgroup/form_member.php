@@ -20,13 +20,12 @@
     <label class="col-sm-2 control-label">Nama Siswa</label>
     <div class="col-sm-4">
     <?php
-        $students = array(
-            '0' => 'Pilih Nama Siswa',
-            '1' => 'Johan',
-            '2' => 'Dadan',
-            '3' => 'Kiki Kurniawan',
-          );
-            echo form_dropdown('id_staff', $students, '0');
+        echo form_hidden('id_kelas', isset($stdgroup_id) ? $stdgroup_id : '');
+        $stdOpt = array('0' => 'Pilih Nama Siswa');
+        foreach ($students as $student) {
+          $stdOpt[$student->id] = $student->nama_lengkap;
+        }
+        echo form_dropdown('id_siswa', $stdOpt, '0');
         ?>
     </div>
   </div>  
@@ -45,25 +44,12 @@
         </tr>
     </tdead>
     <tbody>
+        <?php foreach($group_members as $member) : ?>
         <tr>
-            <td>1000001</td>
-            <td>Fajar Nugraha</td>            
+            <td><?php echo $member->nomor_induk ?></td>
+            <td><?php echo $member->nama_lengkap ?></td>            
             <td><?php echo anchor('student_group/remove_member/', 'Delete') ?></td>
         </tr>
-        <tr>
-            <td>1000002</td>
-            <td>Eki Kurniawan</td>            
-            <td><?php echo anchor('student_group/remove_member/', 'Delete') ?></td>
-        </tr>
-        <tr>
-            <td>1000003</td>
-            <td>Rosa Sukmawati</td>            
-            <td><?php echo anchor('student_group/remove_member/', 'Delete') ?></td>
-        </tr>
-        <tr>
-            <td>1000004</td>
-            <td>Bela Latjuba</td>            
-            <td><?php echo anchor('student_group/remove_member/', 'Delete') ?></td>
-        </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>

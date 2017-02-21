@@ -62,5 +62,32 @@ class Stdgroup_model extends CI_Model
             WHERE id_kelas = '. $group_id);
         return $result->result();
     }
+    
+    public function find_member_by_group_id($stdgroup_id) 
+    {
+        $result = $this->db->query('
+            SELECT siswa.nomor_induk, siswa.nama_lengkap FROM siswa
+            WHERE EXISTS(
+                SELECT * FROM anggota_kelas
+                WHERE siswa.id = anggota_kelas.id_siswa
+                AND id_kelas = ?
+            )
+        ', $stdgroup_id);
+        return $result->result();
+    }
+    
+    public function add_new_member($data) 
+    {
+        $this->db->insert('anggota_kelas', $data);
+    }
+    
+    public function check_member_exists($stdgroup_id, $student_id)
+    {
+        $result = $this->db->query('
+            SELECT 1 AS is_present FROM anggota_kelas
+            WHERE id_kelas = ? AND id_siswa = ?
+        ', array($stdgroup_id, $student_id));        
+        return $result->row();                
+    }
 
 }

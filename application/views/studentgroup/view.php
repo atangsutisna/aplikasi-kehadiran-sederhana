@@ -26,7 +26,7 @@ if ($this->session->flashdata('notif') != NULL) {
             <td>0</td>
             <td>
                 <?php echo anchor('student_group/edit/'. $group->id, 'Edit') ?> | 
-                <?php echo anchor('student_group/new_member', 'Tambah Anggota') ?>
+                <?php echo anchor('student_group/new_member/'.$group->id, 'Tambah Anggota') ?>
             </td>
         </tr>
         <?php endforeach; ?>
