@@ -65,6 +65,13 @@ class Student_Group extends CI_Controller {
 		
 	}
 	
+	public function delete_member($stdgroup_id, $member_id) 
+	{
+		$this->session->set_flashdata('notif', 'Data sudah dihapus');
+		$this->stdgroup_model->delete_member($member_id);
+		redirect('student_group/new_member/'. $stdgroup_id);
+	}
+	
 	public function check_member() 
 	{
 		$student_id = $this->input->post('id_siswa');

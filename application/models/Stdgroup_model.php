@@ -66,12 +66,9 @@ class Stdgroup_model extends CI_Model
     public function find_member_by_group_id($stdgroup_id) 
     {
         $result = $this->db->query('
-            SELECT siswa.nomor_induk, siswa.nama_lengkap FROM siswa
-            WHERE EXISTS(
-                SELECT * FROM anggota_kelas
-                WHERE siswa.id = anggota_kelas.id_siswa
-                AND id_kelas = ?
-            )
+            SELECT anggota_kelas.*, siswa.nomor_induk, siswa.nama_lengkap FROM anggota_kelas
+            INNER JOIN siswa ON (anggota_kelas.id_siswa = siswa.id)
+            WHERE id_kelas = ?
         ', $stdgroup_id);
         return $result->result();
     }
@@ -88,6 +85,11 @@ class Stdgroup_model extends CI_Model
             WHERE id_kelas = ? AND id_siswa = ?
         ', array($stdgroup_id, $student_id));        
         return $result->row();                
+    }
+    
+    public function delete_member($member_id)
+    {
+        $this->db->delete('anggota_kelas', array('id' => $member_id));
     }
 
 }

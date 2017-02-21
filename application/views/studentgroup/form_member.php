@@ -48,7 +48,7 @@
         <tr>
             <td><?php echo $member->nomor_induk ?></td>
             <td><?php echo $member->nama_lengkap ?></td>            
-            <td><?php echo anchor('student_group/remove_member/', 'Delete') ?></td>
+            <td><?php echo anchor('student_group/delete_member/'. $member->id_kelas . '/'. $member->id_siswa, 'Delete') ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
