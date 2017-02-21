@@ -74,19 +74,28 @@
     <tbody>
         <?php foreach ($group_members as $member) : ?>
         <tr>
-            <td><?php echo $member->nis ?></td>
+            <td><?php echo $member->nomor_induk ?></td>
             <td><?php echo $member->nama_lengkap ?></td>            
             <td>
                 <label>
-                    <input type="checkbox" name="status[". $member->id. "]"/> Hadir/Tidak Hadir
+                    <?php 
+                        $ckdata = array(
+                            'name' => 'status['. $member->id_siswa . ']'
+                        );
+                        echo form_checkbox($ckdata);
+                    ?>
+                    Hadir/Tidak Hadir
                 </label>
             </td>
             <td>
-                <select name="keterangan[". $member->id . "]">
-                    <option value="tidak ada kabar">Tidak ada kabar</option>
-                    <option value="sakit">Sakit</option>
-                    <option value="ijin">Ijin</option>                    
-                </select>
+                <?php 
+                    $descOpt = array(
+                        'TIDAK ADA KABAR' => 'Tidak ada kabar',
+                        'SAKIT' => 'SAKIT',
+                        'IJIN' => 'IJIN',
+                    );
+                    echo form_dropdown('keterangan['. $member->id_siswa . ']', $descOpt);
+                ?>
             </td>
         </tr>
         <?php endforeach; ?>
