@@ -35,8 +35,8 @@ class Auth extends CI_Controller {
     }
     
     public function check_username() {
-        $this->load->model('pengguna_model');
-        $userdata = $this->pengguna_model->find_by_username($this->input->post('username'));
+        $this->load->model('user_model');
+        $userdata = $this->user_model->find_by_username($this->input->post('username'));
         $password = $this->input->post('password');
         
         if ($userdata == null) {
