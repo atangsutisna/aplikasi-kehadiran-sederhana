@@ -18,34 +18,16 @@ if ($this->session->flashdata('notif') != NULL) {
         </tr>
     </thead>
     <tbody>
+        <?php foreach($users as $user) : ?>
         <tr>
-            <td>admin</td>
-            <td>Sokrates</td>
-            <td>ADMINISTRATOR</td>
-            <td>aktif</td>
+            <td><?php echo $user->username ?></td>
+            <td><?php echo $user->nama ?></td>
+            <td><?php echo $user->peran ?></td>
+            <td><?php echo $user->status == true ? 'AKTIF' : 'NON AKTIF' ?></td>
             <td>
-                <?php echo anchor('user/edit_user/' , 'Edit') ?>  
+                <?php echo anchor('user/edit/'. $user->id_pengguna , 'Edit') ?>  
             </td>
         </tr>
-        <tr>
-            <td>leonardodavinci</td>
-            <td>Leonardo Davinci</td>
-            <td>SEKRETARIS_SEKOLAH</td>
-            <td>aktif</td>
-            <td>
-                <?php echo anchor('user/edit_user/' , 'Edit') ?>  
-            </td>
-        </tr>
-        <tr>
-            <td>albert</td>
-            <td>Albert Einsten</td>
-            <td>GURU</td>
-            <td>aktif</td>
-            <td>
-                <?php echo anchor('user/edit_user/' , 'Edit') ?>  
-            </td>
-        </tr>
-        
-        
+        <?php endforeach; ?>
     </tbody>
 </table>

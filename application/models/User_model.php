@@ -1,12 +1,28 @@
 <?php
 
-class Pengguna_model extends CI_Model {
+class User_model extends CI_Model {
     
     public function __construct() 
     {
         parent::__construct();
     }
     
+    public function find_all() 
+    {
+        $query = $this->db->query('
+            SELECT pengguna.*, staff.nama FROM pengguna
+            LEFT JOIN staff 
+            ON pengguna.id_pengguna = staff.id
+        ');
+        return $query->result();
+    }
+
+    public function insert($data) 
+    {
+        $this->db->set($data);
+        $this->db->insert('pengguna');
+    }
+
     public function check_username($username) 
     {
         $result = $this->db->query("SELECT 1 FROM pengguna WHERE username = ?", array($username));

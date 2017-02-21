@@ -1,7 +1,7 @@
 <p>&nbsp;</p>
 <?php 
   $formAttr = array("class" => "form-horizontal");
-  echo !isset($user) ? form_open("student/insert", $formAttr) : form_open("student/update", $formAttr);
+  echo !isset($user) ? form_open("user/insert", $formAttr) : form_open("user/update", $formAttr);
 ?>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -28,14 +28,26 @@
     <label class="col-sm-2 control-label">Nama Staff</label>
     <div class="col-sm-5">
       <?php
-        $positions = array(
-            '0' => 'Pilih Staff',
-            '1' => 'Albert Einsten',
-            '2' => 'Leonardo Davinci',
-            '3' => 'Socrates',
-          );
-        echo form_dropdown('id_staff', $positions, '0');
+        $staffOpt = array('0' => 'Pilih Staff');
+        foreach($staffs as $staff) {
+          $staffOpt[$staff->id] = $staff->nama;  
+        }
+        echo form_dropdown('id_pengguna', $staffOpt, isset($user) ? $user->id_pengguna : '0');
       ?>              
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Peran</label>
+    <div class="col-sm-4">
+      <?php
+        $peranOpt = array(
+          '0' => 'Pilih Peran',
+          'ADMINISTRATOR' => 'ADMINISTRATOR',
+          'GURU' => 'GURU',
+          'SEKRETARIS_SEKOLAH' => 'SEKRETARIS_SEKOLAH'
+        );
+        echo form_dropdown('peran', $peranOpt, isset($user) ? $user->peran : '0');
+      ?>
     </div>
   </div>
   <div class="form-group">
