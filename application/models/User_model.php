@@ -17,6 +17,13 @@ class User_model extends CI_Model {
         return $query->result();
     }
 
+    public function find_one($id) 
+    {
+        $this->db->where('id_pengguna', $id);
+        $result = $this->db->get('pengguna');
+        return $result->row();
+    }
+
     public function insert($data) 
     {
         $this->db->set($data);

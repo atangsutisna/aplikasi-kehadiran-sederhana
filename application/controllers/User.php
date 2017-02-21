@@ -34,7 +34,7 @@ class User extends CI_Controller {
 	    $this->form_validation->set_rules('id_pengguna', 'Nama Staff', 'required');
 	    $this->form_validation->set_rules('password', 'Password', 'required');
 	    $this->form_validation->set_rules('peran', 'Peran', 'required');
-	    $this->form_validation->set_rules('retype_password', 'Retype Password', 'required');
+	    $this->form_validation->set_rules('retype_password', 'Retype Password', 'required|callback_check_password_equal');
 	    if ($this->form_validation->run() == TRUE) {
     	    $data = array(
     	        'id_pengguna' => $this->input->post('id_pengguna'),
@@ -54,6 +54,18 @@ class User extends CI_Controller {
 	    }
 	}
 	
+	public function check_password_equal()
+	{
+	    $password = $this->input->post('password');
+	    $retype_password = $this->input->post('retype_password');
+	    if ($password != $retype_password) {
+	        $this->form_validation->set_message('check_password_equal', '{field} is not equal with password');
+	        return FALSE;
+	    } else {
+	        return TRUE;
+	    }
+	}
+	
 	public function update() 
 	{
 	    
@@ -61,7 +73,12 @@ class User extends CI_Controller {
 	
 	public function edit($id) 
 	{
-	    
+	    $data = array(
+	        'user' => $this->user_model->find_one($id),
+	        'staffs' => $this->staff_model->find_all(),
+	        'content_view' => 'user/form'
+	    );
+		$this->load->view('main_view', $data);			
 	}
 	
 
