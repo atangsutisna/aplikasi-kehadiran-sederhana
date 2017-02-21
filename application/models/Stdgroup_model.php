@@ -10,9 +10,14 @@ class Stdgroup_model extends CI_Model
     public function find_all() 
     {
         $query = $this->db->query('
-            SELECT kelas.*, staff.nama AS wali_kelas FROM kelas
+            SELECT kelas.*, staff.nama AS wali_kelas, counter.total_siswa FROM kelas
             LEFT JOIN staff 
             ON kelas.id_wali_kelas = staff.id
+            LEFT JOIN (
+                SELECT id_kelas, count(*) AS total_siswa FROM anggota_kelas
+                GROUP BY id_kelas
+            ) counter
+            ON kelas.id = counter.id_kelas
             ORDER BY kelas.id DESC;
         ');
         return $query->result();
