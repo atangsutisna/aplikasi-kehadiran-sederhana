@@ -12,13 +12,13 @@
         <tr>
             <td>1</td>
             <td>ADMINISTRATOR</td>
-            <td>-</td>
+            <?php echo anchor('role/edit/administrator', 'View') ?>
         </tr>
         <tr>
             <td>2</td>
             <td>SEKRETARIS_SEKOLAH</td>
             <td>
-                <?php echo anchor('role/edit/sekretaris_sekolah', 'Edit') ?>
+                <?php echo anchor('role/edit/sekretaris_sekolah', 'View') ?>
             </td>
         </tr>
     </tbody>

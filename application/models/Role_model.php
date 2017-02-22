@@ -39,5 +39,15 @@ class Role_model extends CI_Model {
         $this->db->delete('roles', array('id' => $id));
     }
     
+    public function has_role($role, $module_name)
+    {
+        $result = $this->db->query('
+            SELECT create_action, read_action, update_action, delete_action FROM roles
+            WHERE role = ? AND module_name = ?
+        ', array($role, $module_name));
+       
+        return $result->row();
+    }
+    
 }
 ?>

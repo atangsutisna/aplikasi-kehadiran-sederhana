@@ -1,5 +1,17 @@
 <p>&nbsp;</p>
-<h3>Hak Akses</h3>
+<?php echo form_open('role/update') ?>
+<div class="row">
+    <div class="col-lg-6">
+        <h3>Hak Akses</h3>        
+    </div>
+    <div class="col-lg-6">
+        <div class="pull-right">
+            <button type="submit" class="btn btn-primary">
+                Update
+            </button>
+        </div>    
+    </div>
+</div>
 <table class="table">
   <tr>
     <th rowspan="2">Nama Modul<br></th>
@@ -29,7 +41,7 @@
         <?php 
             $read_chbk = array(
                 'name' => 'read_action',
-                'checked' => $role->create_action == 1 ? TRUE : FALSE
+                'checked' => $role->read_action == 1 ? TRUE : FALSE
             );
             echo form_checkbox($read_chbk);
         ?>
@@ -38,7 +50,7 @@
         <?php 
             $update_chbk = array(
                 'name' => 'update_action',
-                'checked' => $role->create_action == 1 ? TRUE : FALSE
+                'checked' => $role->update_action == 1 ? TRUE : FALSE
             );
             echo form_checkbox($update_chbk);
         ?>
@@ -47,7 +59,7 @@
         <?php 
             $delete_chbk = array(
                 'name' => 'delete_action',
-                'checked' => $role->create_action == 1 ? TRUE : FALSE
+                'checked' => $role->delete_action == 1 ? TRUE : FALSE
             );
             echo form_checkbox($delete_chbk);
         ?>
@@ -55,3 +67,4 @@
   </tr>
   <?php endforeach; ?>
 </table>
+<?php echo form_close() ?>

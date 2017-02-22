@@ -3,6 +3,8 @@
 
 class User extends CI_Controller {
     
+    const MODULE_NAME = 'Pengguna';
+    
     public function __construct() 
     {
         parent::__construct();
@@ -12,20 +14,46 @@ class User extends CI_Controller {
     
     public function index() 
     {
-        $data = array(
-            'users' => $this->user_model->find_all(),
-	        'content_view' => 'user/view'
-		);        
-		$this->load->view('main_view', $data);
+    	try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				USER::MODULE_NAME
+	    			);
+	        if ($user->read_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+			$data = array(
+	            'users' => $this->user_model->find_all(),
+		        'content_view' => 'user/view'
+			);        
+			
+			$this->load->view('main_view', $data);	        
+    	} catch(Exception $e) {
+			echo $e->getMessage();    			
+    	}
     }
     
     public function new_form() 
 	{
-	    $data = array(
-	        'staffs' => $this->staff_model->find_all(),
-	        'content_view' => 'user/form'
-	    );
-		$this->load->view('main_view', $data);			
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				USER::MODULE_NAME
+	    			);
+	        if ($user == null || $user->create_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }  
+	        
+		    $data = array(
+		        'staffs' => $this->staff_model->find_all(),
+		        'content_view' => 'user/form'
+		    );
+		    
+			$this->load->view('main_view', $data);			
+		} catch (Exception $e) {
+			echo "<h1>". $e->getMessage() . "</h1>";
+		}
+		
 	}
 	
 	public function insert() 
