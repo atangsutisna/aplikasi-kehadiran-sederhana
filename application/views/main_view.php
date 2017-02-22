@@ -45,7 +45,7 @@
             <li><?php echo anchor('student', 'Siswa') ?></li>
             <li><?php echo anchor('student_group', 'Kelas') ?></li>
             <li><?php echo anchor('student_presence', 'Absensi Siswa') ?></li>
-            <li><?php echo anchor('teacher_presence', 'Absensi Guru') ?></li>
+            <li><?php echo anchor('staff_presence', 'Absensi Guru') ?></li>
             <li><?php echo anchor('presence/show_report', 'Laporan') ?></li>
             <li><?php echo anchor('auth/end_session', 'Logout') ?></li>
           </ul>

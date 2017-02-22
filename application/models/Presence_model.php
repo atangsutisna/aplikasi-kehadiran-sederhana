@@ -45,4 +45,30 @@ class Presence_model extends CI_Model
         return $result->row();
     }
     
+    public function find_all_staff_by_date($pres_date) 
+    {
+        $result = $this->db->query('
+            SELECT staff.id AS id_staff, staff.nip, staff.nama, 
+            kehadiran_staff.id_kehadiran, kehadiran_staff.keterangan FROM staff
+            LEFT JOIN (
+                SELECT id AS id_kehadiran, id_staff, keterangan
+                FROM kehadiran_staff
+                WHERE tanggal = ?
+            ) kehadiran_staff 
+            ON (staff.id = kehadiran_staff.id_staff)', $pres_date);
+        return $result->result();
+    }
+    
+    public function check_by_date_and_staffids($pres_date, $staffIds) 
+    {
+        $this->db->select('1 AS is_present');
+        $this->db->where('tanggal', $pres_date);
+        $this->db->where_in('id_staff', $staffIds);
+        $this->db->limit(1);
+        $result = $this->db->get('kehadiran_staff');
+        
+        return $result->row();
+    }
+    
+    
 }
