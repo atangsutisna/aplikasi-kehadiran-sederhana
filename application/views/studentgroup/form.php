@@ -20,7 +20,7 @@
     <label class="col-sm-2 control-label">Nama</label>
     <div class="col-sm-4">
       <?php 
-        echo form_hidden('id', issset($group) ? $group->id : '');
+        echo form_hidden('id', isset($group) ? $group->id : '');
       ?>
       <input type="text" class="form-control" placeholder="Tulis nama kelas" name="nama_kelas" 
       value="<?php echo isset($group) ? $group->nama_kelas : ""?>">
@@ -33,18 +33,22 @@
       value="<?php echo isset($group) ? $group->tahun_ajaran : ""?>">
     </div>
   </div>  
+  <!--
   <div class="form-group">
     <label class="col-sm-2 control-label">Wali Kelas</label>
     <div class="col-sm-4">
       <?php
+      /**
         $positions = array('0' => 'Pilih Wali Kelas');
         foreach ($staffs as $staff) {
           $positions[$staff->id] = $staff->nama;
         }
         echo form_dropdown('id_wali_kelas', $positions, '0');
+        **/
       ?>      
     </div>
   </div>  
+  -->
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">Simpan</button>
