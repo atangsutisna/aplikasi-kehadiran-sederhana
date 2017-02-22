@@ -87,7 +87,7 @@ class Student_presence extends CI_Controller {
             $this->presence_model->update_batch_table('kehadiran_siswa', $update_data);
         } else {
             $this->session->set_flashdata('notif', 'Data sudah disimpan');
-            $this->presence_model->insert_into('kehadiran_siswa', $data);    
+            $this->presence_model->insert_batch_into('kehadiran_siswa', $data);    
         }
         
         redirect('student_presence');
