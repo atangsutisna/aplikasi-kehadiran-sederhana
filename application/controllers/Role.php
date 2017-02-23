@@ -76,7 +76,7 @@ class Role extends CI_Controller {
 	        }   
 	        //code here
 		    $role_name = $this->input->post('role_name');
-		    if ($role_name = 'ADMINISTRATOR') {
+		    if (strtoupper($role_name) == 'ADMINISTRATOR') {
 		        $this->session->set_flashdata('notif', 'ROLE ADMINISTRATOR tidak dapat diubah');    
 		    } else {
 	    	    $create_actions = $this->input->post('create_action') == NULL ? array() : $this->input->post('create_action');
