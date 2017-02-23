@@ -103,7 +103,7 @@
         <li><a href="<?php echo base_url() ?>index.php/student"><i class="fa fa-circle-o text-aqua"></i> <span>Siswa</span></a></li>
         <li><a href="<?php echo base_url() ?>index.php/student_group"><i class="fa fa-circle-o text-aqua"></i> <span>Kelas</span></a></li>
         <li><a href="<?php echo base_url() ?>index.php/student_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Siswa</span></a></li>
-        <li><a href="<?php echo base_url() ?>index.php/student_staff"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Staff</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/staff_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Staff</span></a></li>
         <li><a href="<?php echo base_url() ?>index.php/show_report"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan</span></a></li>
       </ul>
     </section>
