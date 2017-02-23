@@ -8,6 +8,11 @@ class Student_Group extends CI_Controller {
     public function __construct() 
     {
         parent::__construct();
+        if (!$this->session->has_userdata('logged_in')) {
+        	$this->session->set_flashdata('not_authorize', 'Not Authorize');
+        	redirect('auth');
+        }
+        
         $this->load->library('form_validation');
         $this->load->model(array('stdgroup_model', 'staff_model'));
     }
