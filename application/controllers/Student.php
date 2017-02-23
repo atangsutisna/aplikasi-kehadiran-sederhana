@@ -20,7 +20,7 @@ class Student extends CI_Controller {
 		try {
 	    	$user = $this->role_model->has_role(
 	    				$this->session->userdata('role'), 
-	    				Siswa::MODULE_NAME
+	    				Student::MODULE_NAME
 	    			);
 	        if ($user->read_action == 0) {
 	        	throw new Exception("Access Denied");
@@ -42,7 +42,7 @@ class Student extends CI_Controller {
 		try {
 	    	$user = $this->role_model->has_role(
 	    				$this->session->userdata('role'), 
-	    				Siswa::MODULE_NAME
+	    				Student::MODULE_NAME
 	    			);
 	        if ($user->read_action == 0) {
 	        	throw new Exception("Access Denied");
@@ -60,7 +60,7 @@ class Student extends CI_Controller {
 		try {
 	    	$user = $this->role_model->has_role(
 	    				$this->session->userdata('role'), 
-	    				Siswa::MODULE_NAME
+	    				Student::MODULE_NAME
 	    			);
 	        if ($user->read_action == 0) {
 	        	throw new Exception("Access Denied");
@@ -89,7 +89,7 @@ class Student extends CI_Controller {
 		try {
 	    	$user = $this->role_model->has_role(
 	    				$this->session->userdata('role'), 
-	    				Siswa::MODULE_NAME
+	    				Student::MODULE_NAME
 	    			);
 	        if ($user->update_action == 0) {
 	        	throw new Exception("Access Denied");
@@ -109,7 +109,7 @@ class Student extends CI_Controller {
 		try {
 	    	$user = $this->role_model->has_role(
 	    				$this->session->userdata('role'), 
-	    				Siswa::MODULE_NAME
+	    				Student::MODULE_NAME
 	    			);
 	        if ($user->update_action == 0) {
 	        	throw new Exception("Access Denied");
@@ -127,7 +127,7 @@ class Student extends CI_Controller {
 		try {
 	    	$user = $this->role_model->has_role(
 	    				$this->session->userdata('role'), 
-	    				Siswa::MODULE_NAME
+	    				Student::MODULE_NAME
 	    			);
 	        if ($user->delete_action == 0) {
 	        	throw new Exception("Access Denied");
