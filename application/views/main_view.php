@@ -50,7 +50,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo base_url() ?>img/avatar5.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?php echo $this->session->userdata('staff_name') ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -90,21 +90,21 @@
           <img src="<?php echo base_url() ?>img/avatar5.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p><?php echo $this->session->userdata('staff_name') ?></p>
+          <a href="<?php echo base_url() ?>index.php/auth/end_session"><i class="fa fa-circle text-success"></i> Logout</a>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="<?php echo base_url() ?>/user"><i class="fa fa-circle-o text-aqua"></i> <span>Pengguna</span></a></li>
-        <li><a href="<?php echo base_url() ?>/role"><i class="fa fa-circle-o text-aqua"></i> <span>Hak Akses</span></a></li>
-        <li><a href="<?php echo base_url() ?>/staff"><i class="fa fa-circle-o text-aqua"></i> <span>Staff</span></a></li>
-        <li><a href="<?php echo base_url() ?>/student"><i class="fa fa-circle-o text-aqua"></i> <span>Siswa</span></a></li>
-        <li><a href="<?php echo base_url() ?>/student_group"><i class="fa fa-circle-o text-aqua"></i> <span>Kelas</span></a></li>
-        <li><a href="<?php echo base_url() ?>/student_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Siswa</span></a></li>
-        <li><a href="<?php echo base_url() ?>/student_staff"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Staff</span></a></li>
-        <li><a href="<?php echo base_url() ?>/show_report"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/user"><i class="fa fa-circle-o text-aqua"></i> <span>Pengguna</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/role"><i class="fa fa-circle-o text-aqua"></i> <span>Hak Akses</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/staff"><i class="fa fa-circle-o text-aqua"></i> <span>Staff</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/student"><i class="fa fa-circle-o text-aqua"></i> <span>Siswa</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/student_group"><i class="fa fa-circle-o text-aqua"></i> <span>Kelas</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/student_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Siswa</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/student_staff"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Staff</span></a></li>
+        <li><a href="<?php echo base_url() ?>index.php/show_report"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan</span></a></li>
         <li><?php echo anchor('auth/end_session', 'Logout') ?></li>
       </ul>
     </section>
