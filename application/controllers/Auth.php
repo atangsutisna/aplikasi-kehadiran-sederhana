@@ -30,7 +30,8 @@ class Auth extends CI_Controller {
                     'role' => $user->peran,
                     'staff_name' => $user->nama
                 ));
-            redirect('student');
+                
+            redirect('student_presence');
         }
     }
 
