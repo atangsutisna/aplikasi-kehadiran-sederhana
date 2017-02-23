@@ -23,9 +23,9 @@ if ($this->session->flashdata('notif') != NULL) {
         </tr>
         <tr>
             <td>2</td>
-            <td>SEKRETARIS_SEKOLAH</td>
+            <td>STAFF</td>
             <td>
-                <?php echo anchor('role/edit/sekretaris_sekolah', 'View') ?>
+                <?php echo anchor('role/edit/staff', 'View') ?>
             </td>
         </tr>
     </tbody>

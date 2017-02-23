@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Role extends CI_Controller {
     
-    const MODULE_NAME = 'Role';   
+    const MODULE_NAME = 'Hak Akses';   
     
     public function __construct() 
     {
@@ -22,6 +22,7 @@ class Role extends CI_Controller {
 	    				$this->session->userdata('role'), 
 	    				Role::MODULE_NAME
 	    			);
+	    	
 	        if ($user->read_action == 0) {
 	        	throw new Exception("Access Denied");
 	        }   
@@ -30,7 +31,6 @@ class Role extends CI_Controller {
 		        'content_view' => 'role/view'
 		    );
 			$this->load->view('main_view', $data);
-			
 		} catch (Exception $e) {
             $this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));					
 		}

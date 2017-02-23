@@ -54,12 +54,12 @@ if ($this->session->flashdata('notif') != NULL) {
                     <?php 
                         $thRadio = array(
                           'name' => 'keterangan['.$staff->id_staff.']',
-                          'value' => 'TIDAK HADIR',
-                          'checked' => $staff->keterangan == 'TIDAK HADIR' ? TRUE : FALSE
+                          'value' => 'ALPA',
+                          'checked' => $staff->keterangan == 'ALPA' ? TRUE : FALSE
                         );
                         echo form_radio($thRadio);
                     ?>
-                    Tidak Hadir
+                    Alpa
                 </label>
                 <label>
                     <?php 
