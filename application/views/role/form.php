@@ -5,6 +5,9 @@
         <h3>Hak Akses</h3>        
     </div>
     <div class="col-lg-6">
+        <?php
+            echo form_hidden('role_name', $role_name);
+        ?>
         <div class="pull-right">
             <button type="submit" class="btn btn-primary">
                 Update
@@ -31,7 +34,8 @@
     <td>
         <?php 
             $create_chbk = array(
-                'name' => 'create_action',
+                'name' => 'create_action['. $role->module_id . ']',
+                'value' => $role->create_action == 1 ? TRUE : FALSE,
                 'checked' => $role->create_action == 1 ? TRUE : FALSE
             );
             echo form_checkbox($create_chbk);
@@ -40,7 +44,8 @@
     <td>
         <?php 
             $read_chbk = array(
-                'name' => 'read_action',
+                'name' => 'read_action['. $role->module_id. ']',
+                'value' => $role->read_action == 1 ? TRUE : FALSE,
                 'checked' => $role->read_action == 1 ? TRUE : FALSE
             );
             echo form_checkbox($read_chbk);
@@ -49,7 +54,8 @@
     <td>
         <?php 
             $update_chbk = array(
-                'name' => 'update_action',
+                'name' => 'update_action['. $role->module_id . ']',
+                'value' => $role->update_action == 1 ? TRUE : FALSE,
                 'checked' => $role->update_action == 1 ? TRUE : FALSE
             );
             echo form_checkbox($update_chbk);
@@ -58,7 +64,8 @@
     <td>
         <?php 
             $delete_chbk = array(
-                'name' => 'delete_action',
+                'name' => 'delete_action['. $role->module_id . ']',
+                'value' => $role->delete_action == 1 ? TRUE : FALSE,
                 'checked' => $role->delete_action == 1 ? TRUE : FALSE
             );
             echo form_checkbox($delete_chbk);
