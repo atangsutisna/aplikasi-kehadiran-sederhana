@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Student extends CI_Controller {
-    
+    const MODULE_NAME = 'Siswa';    
     
     public function __construct() {
         parent::__construct();
@@ -16,22 +16,61 @@ class Student extends CI_Controller {
     
 	public function index()
 	{
-		$students = $this->siswa_model->find_all();
-		$data = array(
-		        'students' => $students,
-		        'content_view' => 'student/view'
-		    );
-		$this->load->view('main_view', $data);
+		
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				Siswa::MODULE_NAME
+	    			);
+	        if ($user->read_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+
+			$students = $this->siswa_model->find_all();
+			$data = array(
+			        'students' => $students,
+			        'content_view' => 'student/view'
+			    );
+			$this->load->view('main_view', $data);
+		} catch (Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			
+		}
 	}
 	
 	public function new_form() 
 	{
-		$this->load->view('main_view', array('content_view' => 'student/form'));			
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				Siswa::MODULE_NAME
+	    			);
+	        if ($user->read_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+			
+			$this->load->view('main_view', array('content_view' => 'student/form'));						
+		} catch(Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));
+		}
+
 	}
 	
 	public function insert() 
 	{
-		$this->save('insert');
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				Siswa::MODULE_NAME
+	    			);
+	        if ($user->read_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+	        
+			$this->save('insert');
+		} catch(Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));
+		}
+
 	}
 
 	public function check_id($nis) 
@@ -47,27 +86,64 @@ class Student extends CI_Controller {
 	
 	public function edit_student($id) 
 	{
-		$toBeEdit = $this->siswa_model->find_one($id);
-		$this->load->view('main_view', array(
-			'content_view' => 'student/form',
-			'siswa' => $toBeEdit));	
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				Siswa::MODULE_NAME
+	    			);
+	        if ($user->update_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+	        
+			$student = $this->siswa_model->find_one($id);
+			$this->load->view('main_view', array(
+				'content_view' => 'student/form',
+				'siswa' => $student));	
+		} catch (Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));						
+		}
 	}
 	
 	public function update() 
 	{
-		$this->save('update');
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				Siswa::MODULE_NAME
+	    			);
+	        if ($user->update_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+			
+			$this->save('update');			
+		} catch (Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			
+		}
+		
 	}
 	
 	public function delete($id) 
 	{
-		if (!isset($id)) {
-			$this->session->set_flashdata('notif', 'ID must not be null');
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				Siswa::MODULE_NAME
+	    			);
+	        if ($user->delete_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+			
+			if (!isset($id)) {
+				$this->session->set_flashdata('notif', 'ID must not be null');
+				redirect('student');
+			}
+			
+			$this->siswa_model->delete($id);
+			$this->session->set_flashdata('notif', '1 siswa telah dihapus');
 			redirect('student');
+		} catch (Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			
 		}
-		
-		$this->siswa_model->delete($id);
-		$this->session->set_flashdata('notif', '1 siswa telah dihapus');
-		redirect('student');
 	}
 
 	private function save($action) 

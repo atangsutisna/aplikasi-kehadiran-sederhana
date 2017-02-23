@@ -29,7 +29,7 @@ class User extends CI_Controller {
 			
 			$this->load->view('main_view', $data);	        
     	} catch(Exception $e) {
-			echo $e->getMessage();    			
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));
     	}
     }
     
@@ -51,35 +51,48 @@ class User extends CI_Controller {
 		    
 			$this->load->view('main_view', $data);			
 		} catch (Exception $e) {
-			echo "<h1>". $e->getMessage() . "</h1>";
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));
 		}
 		
 	}
 	
 	public function insert() 
 	{
-	    $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username');
-	    $this->form_validation->set_rules('id_pengguna', 'Nama Staff', 'required');
-	    $this->form_validation->set_rules('password', 'Password', 'required');
-	    $this->form_validation->set_rules('peran', 'Peran', 'required');
-	    $this->form_validation->set_rules('retype_password', 'Retype Password', 'required|callback_check_password_equal');
-	    if ($this->form_validation->run() == TRUE) {
-    	    $data = array(
-    	        'id_pengguna' => $this->input->post('id_pengguna'),
-    	        'username' => $this->input->post('username'),
-    	        'password' => $this->input->post('password'),
-    	        'peran' => $this->input->post('peran'),
-    	        'status' => true,
-    	    );    
-    	    $this->user_model->insert($data);
-    	    redirect('user/new_form');
-	    } else {
-    	    $data = array(
-    	        'staffs' => $this->staff_model->find_all(),
-    	        'content_view' => 'user/form'
-    	    );
-    		$this->load->view('main_view', $data);			
-	    }
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				USER::MODULE_NAME
+	    			);
+	        if ($user == null || $user->create_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }  
+		
+		    $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username');
+		    $this->form_validation->set_rules('id_pengguna', 'Nama Staff', 'required');
+		    $this->form_validation->set_rules('password', 'Password', 'required');
+		    $this->form_validation->set_rules('peran', 'Peran', 'required');
+		    $this->form_validation->set_rules('retype_password', 'Retype Password', 'required|callback_check_password_equal');
+		    if ($this->form_validation->run() == TRUE) {
+	    	    $data = array(
+	    	        'id_pengguna' => $this->input->post('id_pengguna'),
+	    	        'username' => $this->input->post('username'),
+	    	        'password' => $this->input->post('password'),
+	    	        'peran' => $this->input->post('peran'),
+	    	        'status' => true,
+	    	    );    
+	    	    $this->user_model->insert($data);
+	    	    redirect('user/new_form');
+		    } else {
+	    	    $data = array(
+	    	        'staffs' => $this->staff_model->find_all(),
+	    	        'content_view' => 'user/form'
+	    	    );
+	    		$this->load->view('main_view', $data);			
+		    }
+		    
+		} catch (Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));
+		}
 	}
 	
 	public function check_username($username) 
@@ -135,12 +148,24 @@ class User extends CI_Controller {
 	
 	public function edit($id) 
 	{
-	    $data = array(
-	        'user' => $this->user_model->find_one($id),
-	        'staffs' => $this->staff_model->find_all(),
-	        'content_view' => 'user/form'
-	    );
-		$this->load->view('main_view', $data);			
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				USER::MODULE_NAME
+	    			);
+	        if ($user == null || $user->update_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }  
+			
+		    $data = array(
+		        'user' => $this->user_model->find_one($id),
+		        'staffs' => $this->staff_model->find_all(),
+		        'content_view' => 'user/form'
+		    );
+			$this->load->view('main_view', $data);			
+		} catch (Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));
+		}
 	}
 	
 
