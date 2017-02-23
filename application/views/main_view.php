@@ -41,7 +41,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><?php echo anchor('user', 'Pengguna') ?></li>              
-            <li><?php echo anchor('role', 'Hak Akses Pengguna') ?></li>                          
+            <li><?php echo anchor('role', 'Hak Akses') ?></li>                          
             <li><?php echo anchor('staff', 'Staff') ?></li>
             <li><?php echo anchor('student', 'Siswa') ?></li>
             <li><?php echo anchor('student_group', 'Kelas') ?></li>
