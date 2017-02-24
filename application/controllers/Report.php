@@ -166,7 +166,6 @@ class Report extends CI_Controller {
         }
         
         //var_dump($data);
-
         $outputBuffer = fopen("php://output", 'w');
         foreach($data as $val) {
             fputcsv($outputBuffer, $val);
@@ -174,5 +173,43 @@ class Report extends CI_Controller {
         
         fclose($outputBuffer);
     }
+    
+    public function print_csv_student_report() 
+    {
+        $year = 2017; //$this->input->post('year');
+        $month = 02; //$this->input->post('month');
+        $filename = "rekap_absensi_student";
+        
+        
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename={$filename}.csv");
+        header("Pragma: no-cache");
+        header("Expires: 0"); 
+        
+        $data = array(array( 'No', 'NIS', 'Nama', 'Kelas', 'Hadir', 'Alpa', 'Ijin', 'Sakit' ));
+        $yearmonth;
+        if ($month < 10) {
+            $yearmonth = $year.'0'.$month;
+        } else {
+            $yearmonth = $year.$month;                
+        }
+        
+        $contents = $this->presence_model->show_student_report_by_yearmonth(201702);
+        $i = 1;
+        foreach ($contents as $content) {
+            $data[] = array($i, $content->nomor_induk,  $content->nama_lengkap, $content->nama_kelas, 
+            $content->count_hadir, $content->count_alpa, $content->count_ijin, $content->count_sakit);
+            $i++;
+        }
+        
+        //var_dump($data);
+    
+        $outputBuffer = fopen("php://output", 'w');
+        foreach($data as $val) {
+            fputcsv($outputBuffer, $val);
+        }
+        
+        fclose($outputBuffer);
+    }    
 
 }

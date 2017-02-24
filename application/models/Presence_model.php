@@ -101,7 +101,7 @@ class Presence_model extends CI_Model
             case when counter_sakit.count is null then 0 else counter_sakit.count end count_sakit,
             case when counter_ijin.count is null then 0 else counter_ijin.count end count_ijin
             from siswa
-            left join (
+            inner join (
                 select 
                 id_siswa,
                 kelas.nama_kelas

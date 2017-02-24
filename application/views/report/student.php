@@ -46,16 +46,30 @@
         <div class="box-header">
             LAPORAN ABSENSI SISWA
             <div class="box-tools">
-                <?php echo form_open('report/print_pdf_student_report') ?>
-                <?php echo form_hidden('month', isset($month) ? $month : '') ?>
-                <?php echo form_hidden('year', isset($year) ? $year : '') ?>
-                <button class="btn btn-primary" <?php echo count($students) == 0 ? 'disabled' : ''?>>
-                    Cetak PDF
-                </button>
-                <?php form_close(); ?>
+
             </div>
         </div>
-        <div class="box-body no-padding">    
+        <div class="box-body">    
+            <div class="row">
+                <div class="col-lg-1">
+                    <?php echo form_open('report/print_pdf_student_report') ?>
+                    <?php echo form_hidden('month', isset($month) ? $month : '') ?>
+                    <?php echo form_hidden('year', isset($year) ? $year : '') ?>
+                    <button class="btn btn-primary" <?php echo count($students) == 0 ? 'disabled' : ''?>>
+                        Cetak PDF
+                    </button>
+                    <?php echo form_close(); ?>                    
+                </div>
+                <div class="col-lg-2">
+                    <?php echo form_open('report/print_csv_student_report') ?>
+                    <?php echo form_hidden('month', isset($month) ? $month : '') ?>
+                    <?php echo form_hidden('year', isset($year) ? $year : '') ?>
+                    <button class="btn btn-primary" <?php echo count($students) == 0 ? 'disabled' : ''?>>
+                        Convert To CSV
+                    </button>
+                    <?php echo form_close(); ?>                    
+                </div>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
