@@ -18,6 +18,18 @@ class Staff_model extends CI_Model
         return $query->result();
     }
     
+    public function find_all_active() 
+    {
+        $query = $this->db->query("
+            SELECT staff.*, pos.nama_jabatan FROM staff
+            LEFT JOIN jabatan pos
+            ON staff.id_jabatan = pos.id
+            WHERE status = 'AKTIF'
+            ORDER BY nama;
+        ");
+        return $query->result();
+    }    
+    
     public function find_all_by_position($id_position) 
     {
         $query = $this->db->query('

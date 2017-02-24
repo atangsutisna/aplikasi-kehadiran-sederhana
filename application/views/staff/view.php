@@ -40,6 +40,7 @@
                     <th>Nama </th>
                     <th>Jabatan</th>
                     <th>Pendidikan</th>
+                    <th>Status</th>
                     <th>#</th>
                 </tr>
             </thead>
@@ -50,6 +51,7 @@
                     <td><?php echo $staff->nama ?></td>
                     <td><?php echo $staff->nama_jabatan ?></td>
                     <td><?php echo $staff->pendidikan_terakhir ?></td>
+                    <td><?php echo $staff->status ?></td>
                     <td>
                         <?php echo anchor('staff/edit/'. $staff->id, 'Edit') ?>
                     </td>

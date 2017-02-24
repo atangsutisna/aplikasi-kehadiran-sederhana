@@ -45,7 +45,7 @@ class User extends CI_Controller {
 	        }  
 	        
 		    $data = array(
-		        'staffs' => $this->staff_model->find_all(),
+		        'staffs' => $this->staff_model->find_all_active(),
 		        'content_view' => 'user/form'
 		    );
 		    
