@@ -47,7 +47,7 @@ class Presence_model extends CI_Model
     
     public function find_all_staff_by_date($pres_date) 
     {
-        $result = $this->db->query('
+        $result = $this->db->query("
             SELECT staff.id AS id_staff, staff.nip, staff.nama, 
             kehadiran_staff.id_kehadiran, kehadiran_staff.keterangan FROM staff
             LEFT JOIN (
@@ -55,7 +55,8 @@ class Presence_model extends CI_Model
                 FROM kehadiran_staff
                 WHERE tanggal = ?
             ) kehadiran_staff 
-            ON (staff.id = kehadiran_staff.id_staff)', $pres_date);
+            ON (staff.id = kehadiran_staff.id_staff)
+            WHERE staff.status = 'AKTIF' ", $pres_date);
         return $result->result();
     }
     

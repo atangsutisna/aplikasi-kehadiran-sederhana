@@ -199,7 +199,7 @@ class Student_Group extends CI_Controller {
 					'tahun_ajaran' => $this->input->post('tahun_ajaran'),
 					'id_wali_kelas' => $this->input->post('id_wali_kelas')
 				);
-				$this->staff_model->insert($data);
+				$this->stdgroup_model->insert($data);
 				$this->session->set_flashdata('notif', 'Data sudah disimpan');
 				redirect('student_group/new_form');
 			} else {
