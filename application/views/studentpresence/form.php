@@ -63,6 +63,7 @@
     <div class="box">
         <div class="box-header">
             <?php echo isset($group_name) ? '<h3>Absensi Kelas: '. $group_name->nama_kelas . ' '. $group_name->tahun_ajaran . '</h3>' : '' ?>    
+            <br/>Tanggal: <?php echo date('d-m-Y') ?>
             <div class="box-tools">
                 <button type="submit" class="btn btn-primary" <?php echo empty($group_members) ? 'disabled' : ''?>>
                     Simpan

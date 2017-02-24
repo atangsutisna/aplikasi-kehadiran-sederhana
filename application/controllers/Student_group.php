@@ -63,7 +63,30 @@ class Student_Group extends CI_Controller {
 		}
 
 	}
-
+	
+	public function edit($id) 
+	{
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				Student_Group::MODULE_NAME
+	    			);
+	        if ($user->update_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+	        
+	        $data = array(
+	            'staffs' => $this->staff_model->find_all(),
+	            'group' => $this->stdgroup_model->find_one($id),
+		        'content_view' => 'studentgroup/form'
+			);        
+			
+			$this->load->view('main_view', $data);			
+		} catch (Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			
+		}
+	}
+	
     public function new_member($stdgroup_id) 
 	{
 		try {
@@ -212,9 +235,9 @@ class Student_Group extends CI_Controller {
 					'id_wali_kelas' => $this->input->post('id_wali_kelas')
 				);
 				$id = $this->input->post('id');
-				$this->staff_model->update($id, $data);
+				$this->stdgroup_model->update($id, $data);
 				$this->session->set_flashdata('notif', 'Data sudah disimpan');
-				redirect('student_group/new_form');
+				redirect('student_group/edit/'. $id);
 			} else {
 	            $data = array(
 	                'staffs' => $this->staff_model->find_all(),

@@ -2,7 +2,7 @@
 <div class="col-lg-12">
     <div class="box box-info">
         <div class="box-header with-border">
-            FORM FILTER SISWA
+            ABSENSI STAFF: <?php echo date('d-m-Y') ?>
             <div class="box-tools">
                 <button type="submit" class="btn btn-primary">
                     Simpan
@@ -18,6 +18,7 @@
                 echo "</div>";
             }
             ?>
+            
             <table class="table">
                 <tdead>
                     <tr>

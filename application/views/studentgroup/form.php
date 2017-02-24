@@ -14,7 +14,6 @@
         ?>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            
             <?php echo validation_errors() ?>
             <?php 
               if ($this->session->flashdata('notif') != NULL) {

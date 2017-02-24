@@ -4,7 +4,7 @@
             LAPORAN ABSENSI SISWA
             <div class="box-tools">
                 <?php echo anchor('report', '<< Kembali', array('class' => 'btn btn-primary')) ?>                
-                <?php echo anchor('report', 'Cetak PDF', array('class' => 'btn btn-primary')) ?>      
+                <?php echo anchor('report/student_report_pdf', 'Cetak PDF', array('class' => 'btn btn-primary')) ?>      
             </div>
         </div>
         <div class="box-body no-padding">    

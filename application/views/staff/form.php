@@ -21,12 +21,12 @@
           }
         ?>
         <div class="form-group">
-          <label class="col-sm-2 control-label">ID</label>
+          <label class="col-sm-2 control-label">NIP</label>
           <div class="col-sm-5">
             <?php 
               echo form_hidden('id', isset($staff) ? $staff->id : '');
             ?>
-            <input type="text" class="form-control" placeholder="NIP jika pns" name="nip" 
+            <input type="text" class="form-control" placeholder="NIP.." name="nip" 
             value="<?php echo isset($staff) ? $staff->nip : ""?>"
             <?php echo isset($staff) ? 'disabled' : '' ?>>
           </div>
