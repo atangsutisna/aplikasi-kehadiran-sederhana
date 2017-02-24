@@ -50,7 +50,8 @@ class User_model extends CI_Model {
             INNER JOIN staff 
             ON (pengguna.id_pengguna = staff.id)
             WHERE staff.status = 'AKTIF'
-            WHERE username = ?", array($username));
+            AND
+            username = ?", array($username));
         return $result->row();
     }
     
