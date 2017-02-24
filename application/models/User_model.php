@@ -11,8 +11,12 @@ class User_model extends CI_Model {
     {
         $query = $this->db->query('
             SELECT pengguna.*, staff.nama FROM pengguna
-            LEFT JOIN staff 
+            INNER JOIN staff 
             ON pengguna.id_pengguna = staff.id
+            UNION
+            SELECT pengguna.*, siswa.nama_lengkap AS nama FROM pengguna
+            INNER JOIN siswa
+            ON pengguna.id_pengguna = siswa.id
         ');
         return $query->result();
     }
@@ -46,7 +50,15 @@ class User_model extends CI_Model {
     public function find_by_username($username) 
     {
         $result = $this->db->query("
-            SELECT staff.nama, pengguna.* FROM pengguna 
+            SELECT * FROM pengguna WHERE
+            username = ?", array($username));
+        return $result->row();
+    }
+    
+    public function get_user_info_from_staff($username) 
+    {
+        $result = $this->db->query("
+            SELECT staff.nama, pengguna.peran FROM pengguna 
             INNER JOIN staff 
             ON (pengguna.id_pengguna = staff.id)
             WHERE staff.status = 'AKTIF'
@@ -54,6 +66,18 @@ class User_model extends CI_Model {
             username = ?", array($username));
         return $result->row();
     }
+    
+    public function get_user_info_from_siswa($username) 
+    {
+        $result = $this->db->query("
+            SELECT siswa.nama_lengkap AS nama, pengguna.peran FROM pengguna
+            INNER JOIN siswa
+            ON (pengguna.id_pengguna = siswa.id)
+            AND
+            username = ?", array($username));
+        return $result->row();
+    }
+    
     
     
 }

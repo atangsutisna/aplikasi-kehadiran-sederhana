@@ -23,12 +23,16 @@ class Auth extends CI_Controller {
         } else {
             $this->load->model('user_model');
             $username = $this->input->post('username');
-            $user = $this->user_model->find_by_username($username);
+            $user_info = $this->user_model->get_user_info_from_staff($username);
+            if ($user_info == null) {
+                $user_info = $this->user_model->get_user_info_from_siswa($username);
+            }
+            
             $this->session->set_userdata(array(
                     'logged_in' => TRUE,
-                    'staff_id' => $user->id_pengguna,
-                    'role' => $user->peran,
-                    'staff_name' => $user->nama
+                    'staff_id' => $user_info->id_pengguna,
+                    'role' => $user_info->peran,
+                    'staff_name' => $user_info->nama
                 ));
                 
             redirect('student_presence');
