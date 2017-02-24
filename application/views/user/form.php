@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-  <div class="box box-info">
+    <div class="box box-info">
         <div class="box-header with-border">
             FORM PENGGUNA
             <div class="box-tools">
@@ -19,7 +19,7 @@
                   echo $this->session->flashdata('notif');
                   echo "</div>";
               }
-            ?>          
+            ?> 
             <div class="form-group">
               <label class="col-sm-2 control-label">Username</label>
               <div class="col-sm-4">
@@ -39,19 +39,19 @@
                   echo form_dropdown('id_pengguna', $staffOpt, isset($user) ? $user->id_pengguna : '0');
                 ?>              
               </div>
-            </div>            
+            </div>   
             <div class="form-group">
-              <label class="col-sm-2 control-label">Peran</label>
-              <div class="col-sm-4">
-                <?php
-                  $peranOpt = array(
-                    '0' => 'Pilih Peran',
-                    'ADMINISTRATOR' => 'ADMINISTRATOR',
-                    'STAFF' => 'STAFF'
-                  );
-                  echo form_dropdown('peran', $peranOpt, isset($user) ? $user->peran : '0');
-                ?>
-              </div>
+                <label class="col-sm-2 control-label">Peran</label>
+                  <div class="col-sm-4">
+                    <?php
+                      $peranOpt = array(
+                        '0' => 'Pilih Peran',
+                        'ADMINISTRATOR' => 'ADMINISTRATOR',
+                        'STAFF' => 'STAFF'
+                      );
+                      echo form_dropdown('peran', $peranOpt, isset($user) ? $user->peran : '0');
+                    ?>
+                  </div>
             </div>  
             <div class="form-group">
               <label class="col-sm-2 control-label">Password</label>
@@ -70,8 +70,9 @@
                 <button type="submit" class="btn btn-primary">Simpan</button>
               </div>
             </div>            
-            <?php echo form_close() ?>            
-        </div>
-        <!-- end of box body -->
+          </form>
+      </div>
   </div>    
 </div>  
+<p>&nbsp;</p>
+<p>&nbsp;</p>

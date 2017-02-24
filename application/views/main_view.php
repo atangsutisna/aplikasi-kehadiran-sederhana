@@ -129,13 +129,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
+        Aplikasi Absensi 
+        <!--
         <small>Optional description</small>
+        -->
       </h1>
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <div class="content body">
       <!-- Your Page Content Here -->
         <?php 
           if (isset($content_view)) {
@@ -144,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             echo "<h2>Content View Not Found Or Empty</h2>";  
           }
         ?>
-    </section>
+    </div>
     
     <!-- /.content -->
   </div>

@@ -77,3 +77,4 @@
     </div>    
 </div>
 <?php echo form_close() ?>
+<p>&nbsp;</p>
