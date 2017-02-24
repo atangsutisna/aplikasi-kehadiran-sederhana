@@ -181,6 +181,9 @@ class Staff extends CI_Controller {
 					'id_jabatan' => $this->input->post('id_jabatan'),
 					'status' => $this->input->post('status')
 				);
+				// update status jadi catatan
+				// jangan sampai administrator di non aktifin
+				// cek yang login jangan aktifin sendir
 				$this->staff_model->update($id, $data);
 				$this->session->set_flashdata('notif', 'Data sudah diupdate');
 				redirect('staff/edit/'. $id);
