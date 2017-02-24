@@ -186,5 +186,31 @@ class Student extends CI_Controller {
 			$this->load->view('main_view', array('content_view' => 'student/form'));						
 		}
 	}
+	
+	public function order() 
+	{
+		$order_by = $this->input->post('order_by');
+		$order_desc = $this->input->post('order_desc');
+		try {
+	    	$user = $this->role_model->has_role(
+	    				$this->session->userdata('role'), 
+	    				Student::MODULE_NAME
+	    			);
+	        if ($user->read_action == 0) {
+	        	throw new Exception("Access Denied");
+	        }    		
+
+			$students = $this->siswa_model->find_all($order_by, $order_desc);
+			$data = array(
+					'selected_order_by' => $order_by,
+					'selected_order_desc' => $order_desc,
+			        'students' => $students,
+			        'content_view' => 'student/view'
+			    );
+			$this->load->view('main_view', $data);
+		} catch (Exception $e) {
+			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			
+		}		
+	}
 
 }

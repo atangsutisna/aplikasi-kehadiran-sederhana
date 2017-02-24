@@ -13,7 +13,7 @@ class Staff_model extends CI_Model
             SELECT staff.*, pos.nama_jabatan FROM staff
             LEFT JOIN jabatan pos
             ON staff.id_jabatan = pos.id
-            ORDER BY nama;
+            ORDER BY nama ASC;
         ');
         return $query->result();
     }
@@ -30,15 +30,15 @@ class Staff_model extends CI_Model
         return $query->result();
     }    
     
-    public function find_all_by_position($id_position) 
+    public function find_all_by_position($id_position, $order_by = 'nama', $order_desc = 'asc') 
     {
-        $query = $this->db->query('
-            SELECT staff.*, pos.nama_jabatan FROM staff
-            LEFT JOIN jabatan pos
-            ON staff.id_jabatan = pos.id
-            WHERE staff.id_jabatan = ?
-            ORDER BY nama;
-        ', $id_position);
+        $sql = "SELECT staff.*, pos.nama_jabatan FROM staff LEFT JOIN jabatan ON staff.id_jabatan = jabatan.id ";
+        if ($id_position != null) {
+            $sql .= "WHERE staff.id_jabatan = ? ";
+        }
+            
+        $sql .= " ORDER BY {$order_by} {$order_desc} ";
+        $query = $this->db->query($sql, $id_position);
         return $query->result();        
     }
     

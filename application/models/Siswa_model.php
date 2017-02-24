@@ -8,9 +8,9 @@ class Siswa_model extends CI_Model {
         parent::__construct();
     }
     
-    public function find_all() 
+    public function find_all($order_by = 'nama_lengkap', $order_desc = 'asc') 
     {
-        $query = $this->db->get('siswa');
+        $query = $this->db->query("SELECT * FROM siswa ORDER BY {$order_by} {$order_desc}");
         return $query->result();
     }
     

@@ -149,7 +149,7 @@ class Student_presence extends CI_Controller {
             }
             
             $group_id = $this->input->post('id_kelas');
-            //redirect('student_presence/view/'. $group_id);	        
+            redirect('student_presence/view/'. $group_id);	        
         } catch (Exception $e) {
 			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			            
         }

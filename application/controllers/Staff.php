@@ -49,12 +49,17 @@ class Staff extends CI_Controller {
 	        }    		
 	        
 			$id_position = $this->input->post('id_jabatan');
+			$order_by = $this->input->post('order_by');
+			$order_desc = $this->input->post('order_desc');
 			$data = array(
+				'selected_order_by' => $order_by,
+				'selected_order_desc' => $order_desc,
 				'selected_position_id' => $this->input->post('id_jabatan'),
 				'positions' => $this->position_model->find_all(),
-				'staffs' => $this->staff_model->find_all_by_position($id_position),
+				'staffs' => $this->staff_model->find_all_by_position($id_position, $order_by, $order_desc),
 		        'content_view' => 'staff/view'
 			);
+			//var_dump($data);
 			$this->load->view('main_view', $data);
 		} catch (Exception $e) {
 			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			

@@ -6,7 +6,7 @@
                 <?php echo anchor('staff/new_form', 'Tambah Staff Baru', array('class' => 'btn btn-primary')) ?>                
             </div>
         </div>        
-    <div class="box-body no-padding">    
+    <div class="box-body">    
         <?php 
         if ($this->session->flashdata('notif') != NULL) {
             echo "<div class='alert alert-info'>";
@@ -28,6 +28,21 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-2 control-label">Urut berdasarkan</label>
+                <div class="col-sm-4">
+                <?php
+                    $orderByOpt = array(
+                        'nip' => 'NIP',
+                        'nama' => 'Nama',
+                        'nama_jabatan' => 'Jabatan'
+                    );
+                    echo form_dropdown('order_by', $orderByOpt, isset($selected_order_by) ? $selected_order_by : 'nama');
+                    $order_desc = array('asc' => 'ASC', 'desc' => 'DESC');
+                    echo form_dropdown('order_desc', $order_desc, isset($selected_order_desc) ? $selected_order_desc : 'asc');
+                ?>
+                </div>
+            </div>                
+            <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary">Tampilkan</button>
               </div>
@@ -36,7 +51,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>NIP</th>
                     <th>Nama </th>
                     <th>Jabatan</th>
                     <th>Pendidikan</th>
