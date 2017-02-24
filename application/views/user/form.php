@@ -47,7 +47,8 @@
                       $peranOpt = array(
                         '0' => 'Pilih Peran',
                         'ADMINISTRATOR' => 'ADMINISTRATOR',
-                        'STAFF' => 'STAFF'
+                        'STAFF' => 'STAFF',
+                        'USER' => 'USER'
                       );
                       echo form_dropdown('peran', $peranOpt, isset($user) ? $user->peran : '0');
                     ?>

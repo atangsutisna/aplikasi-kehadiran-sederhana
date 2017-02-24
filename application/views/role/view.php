@@ -32,6 +32,13 @@
                             <?php echo anchor('role/edit/staff', 'Hak Akses') ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>USER</td>
+                        <td>
+                            <?php echo anchor('role/edit/user', 'Hak Akses') ?>
+                        </td>
+                    </tr>
                 </tbody>
             </table>            
             <p>&nbsp;</p>

@@ -4,6 +4,7 @@
         <div class="box-header with-border">
             HAK AKSES
             <div class="box-tools">
+                <?php echo anchor('role', '<< Kembali', array('class' => 'btn btn-primary')) ?>
                 <button type="submit" class="btn btn-primary">
                     Update
                 </button>
