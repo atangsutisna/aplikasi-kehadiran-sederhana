@@ -156,6 +156,19 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="col-sm-2 control-label">Status</label>
+          <div class="col-sm-5">
+            <?php
+              $statusOpt = array(
+                'AKTIF' => 'AKTIF',
+                'NON_AKTIF' => 'NON AKTIF',
+                'VOID' => 'VOID'
+              );
+              echo form_dropdown('status', $statusOpt, 'AKTIF');
+            ?>
+          </div>
+        </div>
+        <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </div>

@@ -51,9 +51,7 @@
                     <td><?php echo $staff->nama_jabatan ?></td>
                     <td><?php echo $staff->pendidikan_terakhir ?></td>
                     <td>
-                        <?php echo anchor('staff/edit/'. $staff->id, 'Edit') ?> | 
-                        <?php echo anchor('staff/delete/'. $staff->id, 'Delete', array('onclick' =>  
-                        "return confirm('Anda yakin akan menghapus ?');")) ?>
+                        <?php echo anchor('staff/edit/'. $staff->id, 'Edit') ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

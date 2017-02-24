@@ -108,6 +108,7 @@ class Staff extends CI_Controller {
 					'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 					'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
 					'id_jabatan' => $this->input->post('id_jabatan'),
+					'status' => $this->input->post('status')
 				);
 				$this->staff_model->insert($data);
 				$this->session->set_flashdata('notif', 'Data sudah disimpan');
@@ -178,6 +179,7 @@ class Staff extends CI_Controller {
 					'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 					'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
 					'id_jabatan' => $this->input->post('id_jabatan'),
+					'status' => $this->input->post('status')
 				);
 				$this->staff_model->update($id, $data);
 				$this->session->set_flashdata('notif', 'Data sudah diupdate');
