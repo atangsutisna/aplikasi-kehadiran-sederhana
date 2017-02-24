@@ -4,20 +4,25 @@
             LAPORAN ABSENSI
         </div>
         <div class="box-body">
-            <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                <input class="span2" size="16" type="text" value="12-02-2012">
-                <span class="add-on"><i class="icon-th"></i></span>
-            </div>
+            Pilih bulan
+            <?php
+                $monthOpt = array();
+                for ($i=1; $i <= 12; $i++) {
+                    $monthOpt[$i] = $i;
+                }
+                echo form_dropdown('month', $monthOpt, '1');
+            ?>
+            Pilih Tahun
+            <?php
+                $yearOpt[date('Y') - 1] = date('Y') - 1;
+                $yearOpt[date('Y')] = date('Y');
+                $yearOpt[date('Y') + 1] = date('Y') + 1;
+                echo form_dropdown('year', $yearOpt, date('Y'));
+            ?>
+            <br/><br/>
             <?php echo anchor('report/student', 'Rekap Absensi Siswa', array('class' => 'btn btn-primary')) ?> 
             <?php echo anchor('report/staff', 'Rekap Absensi Staff', array('class' => 'btn btn-primary')) ?> 
         </div>
     </div>
 </div>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <p>&nbsp;</p>

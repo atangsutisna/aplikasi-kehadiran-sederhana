@@ -118,7 +118,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li><a href="<?php echo base_url() ?>index.php/student_group"><i class="fa fa-circle-o text-aqua"></i> <span>Kelas</span></a></li>
         <li><a href="<?php echo base_url() ?>index.php/student_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Siswa</span></a></li>
         <li><a href="<?php echo base_url() ?>index.php/staff_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Staff</span></a></li>
-        <li><a href="<?php echo base_url() ?>index.php/report"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><?php echo anchor('report/student', 'Absensi Siswa') ?></li>
+            <li><?php echo anchor('report/staff', 'Absensi Staff') ?></li>
+          </ul>
+        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -250,10 +260,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url() ?>js/app.min.js"></script>
-<script src="<?php echo base_url() ?>js/datepicker/bootstrap-datepicker.js"></script>
+<!--
+<script src="<?php //echo base_url() ?>js/datepicker/bootstrap-datepicker.js"></script>
+-->
 <!-- only for report -->
 <script type="text/javascript">
-    $('#dp5').datepicker();
+//$('#yearpicker').monthpicker();
+/**
+  $(document).ready(function(){
+    console.info('attempting to load datepicker');
+    $('#dpMonths').datepicker();
+    console.info('setelahnya');
+  });**/
+  
 </script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

@@ -104,6 +104,7 @@ class Student_Group extends CI_Controller {
 				'group_members' => $this->stdgroup_model->find_member_by_group_id($stdgroup_id),
 				'content_view' => 'studentgroup/form_member'
 			);
+			
 			$this->load->view('main_view', $data);					
 		} catch (Exception $e) {
 			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			

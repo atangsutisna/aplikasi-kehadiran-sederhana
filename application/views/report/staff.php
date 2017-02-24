@@ -29,24 +29,16 @@
                         <td><?php echo $value->nama_lengkap ?></td>
                         <td><?php echo $value->nama_jabatan ?></td>
                         <td>
-                           <?php if ($value->keterangan == 'HADIR') : ?>
-                               <i class="fa fa-check" aria-hidden="true"></i>
-                           <?php endif; ?>
+                           <?php echo $value->count_hadir ?>
                         </td>
                         <td>
-                           <?php if ($value->keterangan == 'ALPA') : ?>
-                               <i class="fa fa-check" aria-hidden="true"></i>
-                           <?php endif; ?>
+                            <?php echo $value->count_alpa ?>
                         </td>
                         <td>
-                            <?php if ($value->keterangan == 'IJIN') : ?>
-                               <i class="fa fa-check" aria-hidden="true"></i>
-                           <?php endif; ?>
+                            <?php echo $value->count_ijin ?>
                         </td>
                         <td>
-                            <?php if ($value->keterangan == 'SAKIT') : ?>
-                               <i class="fa fa-check" aria-hidden="true"></i>
-                           <?php endif; ?>
+                            <?php echo $value->count_sakit ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
