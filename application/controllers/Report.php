@@ -140,11 +140,18 @@ class Report extends CI_Controller {
     
     public function test() 
     {
-        $data = array(
-            '0' => 'testing 1',
-            '1' => 'testing 2'
-        );
+        $filename = "example";
+
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename={$filename}.csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
         
+        $data = array(
+                array( 'row_1_col_1', 'row_1_col_2', 'row_1_col_3' ),
+                array( 'row_2_col_1', 'row_2_col_2', 'row_2_col_3' ),
+                array( 'row_3_col_1', 'row_3_col_2', 'row_3_col_3' ),
+            );        
         $outputBuffer = fopen("php://output", 'w');
         foreach($data as $val) {
             fputcsv($outputBuffer, $val);

@@ -162,10 +162,16 @@ class User extends CI_Controller {
 	        if ($user == null || $user->update_action == 0) {
 	        	throw new Exception("Access Denied");
 	        }  
+
+	        $query = $this->db->query("
+	        	SELECT id, nama FROM staff WHERE status = 'AKTIF'
+	        	UNION
+	        	SELECT id, nama_lengkap AS nama FROM siswa
+	        ");
 			
 		    $data = array(
 		        'user' => $this->user_model->find_one($id),
-		        'staffs' => $this->staff_model->find_all(),
+		        'users' => $query->result(),
 		        'content_view' => 'user/form'
 		    );
 			$this->load->view('main_view', $data);			
