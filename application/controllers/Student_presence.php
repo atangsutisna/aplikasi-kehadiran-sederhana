@@ -8,8 +8,9 @@ class Student_presence extends CI_Controller {
     public function __construct() 
     {
         parent::__construct();
-        if (!$this->session->has_userdata('logged_in')) {
-        	$this->session->set_flashdata('not_authorize', 'Not Authorize');
+        if (!$this->session->has_userdata('logged_in') || 
+            !$this->session->has_userdata('staff_id')) {
+        	$this->session->set_flashdata('not_authorize', 'Not Authorize or session was close');
         	redirect('auth');
         }
         
@@ -125,7 +126,7 @@ class Student_presence extends CI_Controller {
             }
             
             $prensece = $this->presence_model->check_by_date_and_stundentids(date('Y/m/d'), $studentIds);
-            if ($prensece->is_present == 1) {
+            if ($prensece != NULL && $prensece->is_present == 1) {
                 $presence_ids = $this->input->post('id_kehadiran');   
                 $update_data = array();
                 foreach ($presence_ids as $idx => $value) {
@@ -138,7 +139,8 @@ class Student_presence extends CI_Controller {
                         }
                     }
                 }
-    
+                
+                
                 $this->session->set_flashdata('notif', 'Data sudah diubah');
                 $this->presence_model->update_batch_table('kehadiran_siswa', $update_data);
             } else {
@@ -147,7 +149,7 @@ class Student_presence extends CI_Controller {
             }
             
             $group_id = $this->input->post('id_kelas');
-            redirect('student_presence/view/'. $group_id);	        
+            //redirect('student_presence/view/'. $group_id);	        
         } catch (Exception $e) {
 			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			            
         }

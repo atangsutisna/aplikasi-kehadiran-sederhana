@@ -30,12 +30,12 @@ class Auth extends CI_Controller {
             
             $this->session->set_userdata(array(
                     'logged_in' => TRUE,
-                    'staff_id' => $user_info->id_pengguna,
+                    'staff_id' => $user_info->id,
                     'role' => $user_info->peran,
                     'staff_name' => $user_info->nama
                 ));
-                
-            redirect('student_presence');
+            //var_dump($this->session->userdata('staff_id'));    
+           redirect('student_presence');
         }
     }
 

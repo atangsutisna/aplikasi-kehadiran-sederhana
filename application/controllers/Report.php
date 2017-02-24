@@ -137,5 +137,20 @@ class Report extends CI_Controller {
             echo "Pdfcrowd Error: " . $why;
         }
     }
+    
+    public function test() 
+    {
+        $data = array(
+            '0' => 'testing 1',
+            '1' => 'testing 2'
+        );
+        
+        $outputBuffer = fopen("php://output", 'w');
+        foreach($data as $val) {
+            fputcsv($outputBuffer, $val);
+        }
+        
+        fclose($outputBuffer);
+    }
 
 }

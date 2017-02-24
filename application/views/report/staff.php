@@ -53,6 +53,9 @@
                     Cetak PDF
                 </button>
                 <?php form_close(); ?>
+                <button class="btn btn-primary">
+                    Covert to CSV
+                </button>
             </div>
         </div>
         <div class="box-body no-padding">    
