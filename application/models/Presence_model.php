@@ -70,5 +70,52 @@ class Presence_model extends CI_Model
         return $result->row();
     }
     
+    public function show_student_report_by_date($pres_date)
+    {
+        $result = $this->db->query('
+            select 
+            siswa.nomor_induk, 
+            siswa.nama_lengkap, 
+            kelas.nama_kelas,
+            kehadiran.keterangan
+            from siswa
+            left join (
+                select 
+                id_siswa,
+                kelas.nama_kelas
+                from anggota_kelas
+                left join kelas
+                on anggota_kelas.id_kelas = kelas.id
+            ) kelas
+            on siswa.id = kelas.id_siswa
+            left join (
+                select 
+                id_siswa,
+                keterangan
+                from kehadiran_siswa
+                where tanggal = ?
+            ) kehadiran
+            on siswa.id = kehadiran.id_siswa
+        ', $pres_date);
+        
+        return $result->result();
+    }
+    
+    public function show_staff_report_by_date($pres_date)
+    {
+        $result = $this->db->query('
+            SELECT nip, nama AS nama_lengkap, jabatan.nama_jabatan, kehadiran.keterangan
+            FROM staff
+            LEFT JOIN jabatan 
+            ON staff.id_jabatan = jabatan.id
+            LEFT JOIN (
+                SELECT *
+                FROM kehadiran_staff
+                WHERE tanggal = ?
+            ) kehadiran 
+            ON staff.id = kehadiran.id_staff        
+        ', $pres_date);
+        return $result->result();
+    }
     
 }
