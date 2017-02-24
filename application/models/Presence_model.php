@@ -138,7 +138,7 @@ class Presence_model extends CI_Model
         return $result->result();
     }
     
-    public function show_staff_report_by_month($pres_date)
+    public function show_staff_report_by_yearmonth($yearmonth)
     {
         $result = $this->db->query("
             SELECT staff.id,nip, nama AS nama_lengkap, jabatan.nama_jabatan, 
@@ -153,7 +153,7 @@ class Presence_model extends CI_Model
                 SELECT id_staff, count(*) as count_hadir
                 FROM kehadiran_staff
                 WHERE keterangan = 'HADIR'
-                AND MONTH(tanggal) = ?
+                AND EXTRACT(YEAR_MONTH FROM tanggal) = ?
                 GROUP BY id_staff
             ) counter_hadir
             ON staff.id = counter_hadir.id_staff        
@@ -161,7 +161,7 @@ class Presence_model extends CI_Model
                 SELECT id_staff, count(*) as count_alpa
                 FROM kehadiran_staff
                 WHERE keterangan = 'ALPA'
-                AND MONTH(tanggal) = ?
+                AND EXTRACT(YEAR_MONTH FROM tanggal) = ?
                 GROUP BY id_staff
             ) counter_alpa
             ON staff.id = counter_alpa.id_staff        
@@ -169,7 +169,7 @@ class Presence_model extends CI_Model
                 SELECT id_staff, count(*) as count_sakit
                 FROM kehadiran_staff
                 WHERE keterangan = 'SAKIT'
-                AND MONTH(tanggal) = ?
+                AND EXTRACT(YEAR_MONTH FROM tanggal) = ?
                 GROUP BY id_staff
             ) counter_sakit
             ON staff.id = counter_sakit.id_staff        
@@ -177,12 +177,12 @@ class Presence_model extends CI_Model
                 SELECT id_staff, count(*) as count_ijin
                 FROM kehadiran_staff
                 WHERE keterangan = 'IJIN'
-                AND MONTH(tanggal) = ?
+                AND EXTRACT(YEAR_MONTH FROM tanggal) = ?
                 GROUP BY id_staff
             ) counter_ijin
             ON staff.id = counter_ijin.id_staff        
             WHERE staff.status = 'AKTIF'
-        ", array($pres_date, $pres_date, $pres_date, $pres_date));
+        ", array($yearmonth, $yearmonth, $yearmonth, $yearmonth));
         return $result->result();
     }
     

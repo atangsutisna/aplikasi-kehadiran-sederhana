@@ -47,10 +47,23 @@ class Report extends CI_Controller {
 
     public function staff() 
     {
-        $this->load->view('main_view', array(
-            'staffs' => $this->presence_model->show_staff_report_by_month(2),
-            'content_view' => 'report/staff'
-        ));
+        $month = $this->input->post('month');
+        $year = $this->input->post('year');
+        $data['content_view'] = 'report/staff';
+        $data['staffs'] = [];
+        
+        if (isset($month) && isset($year)) {
+            if ($month < 10) {
+                $yearmonth = $year.'0'.$month;
+            } else {
+                $yearmonth = $year.$month;                
+            }
+            $data['staffs'] = $this->presence_model->show_staff_report_by_yearmonth($yearmonth);
+            $data['month'] = $month;
+            $data['year'] = $year;
+        }
+
+        $this->load->view('main_view', $data);
     }
     
     public function print_pdf_student_report()
@@ -89,21 +102,30 @@ class Report extends CI_Controller {
         )); 
     }
     
-    public function staff_report() 
+    public function staff_report_pdf_template($yearmonth) 
     {
         $this->load->view('report/staff_table', array(
             'current_date' => date('d/m/Y'),
-            'staffs' => $this->presence_model->show_staff_report_by_date(date('Y/m/d')),
+            'staffs' => $this->presence_model->show_staff_report_by_yearmonth($yearmonth),
         ));        
     }
 
-    public function staff_report_pdf()
+    public function print_pdf_staff_report()
     {
         try {
+            $month = $this->input->post('month');
+            $year = $this->input->post('year');
+            $yearmonth;
+            if ($month < 10) {
+                $yearmonth = $year.'0'.$month;
+            } else {
+                $yearmonth = $year.$month;                
+            }
+            
             // create an API client instance
             $client = new Pdfcrowd("atang", "e2a89092c8b140255a6521f87ce51407");
             // convert a web page and store the generated PDF into a $pdf variable
-            $pdf = $client->convertURI(base_url(). 'index.php/report/staff_report');
+            $pdf = $client->convertURI(base_url(). 'index.php/report/staff_report_pdf_template/'. $yearmonth);
             // set HTTP response headers
             header("Content-Type: application/pdf");
             header("Cache-Control: max-age=0");
