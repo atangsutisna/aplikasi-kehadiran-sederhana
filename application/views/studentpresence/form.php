@@ -90,50 +90,15 @@
                         </td>
                         <td><?php echo $member->nama_lengkap ?></td>            
                         <td>
-                            <label>
-                                <?php 
-                                    $hRadio = array(
-                                      'name' => 'keterangan['.$member->id_siswa.']',
-                                      'value' => 'HADIR',
-                                      'checked' => $member->keterangan == 'HADIR' ? TRUE : FALSE
-                                    );
-                                    echo form_radio($hRadio);
-                                ?>
-                                Hadir
-                            </label>
-                            <label>
-                                <?php 
-                                    $thRadio = array(
-                                      'name' => 'keterangan['.$member->id_siswa.']',
-                                      'value' => 'ALPA',
-                                      'checked' => $member->keterangan == 'ALPA' ? TRUE : FALSE
-                                    );
-                                    echo form_radio($thRadio);
-                                ?>
-                                Alpa
-                            </label>
-                            <label>
-                                <?php 
-                                    $sRadio = array(
-                                      'name' => 'keterangan['.$member->id_siswa.']',
-                                      'value' => 'SAKIT',
-                                      'checked' => $member->keterangan == 'SAKIT' ? TRUE : FALSE
-                                    );
-                                    echo form_radio($sRadio);
-                                ?>
-                                SAKIT
-                            </label>
-                            <label>
-                                <?php 
-                                    $iRadio = array(
-                                      'name' => 'keterangan['.$member->id_siswa.']',
-                                      'value' => 'IJIN',
-                                      'checked' => $member->keterangan == 'IJIN' ? TRUE : FALSE                          
-                                    );
-                                    echo form_radio($iRadio);
-                                ?>
-                                IJIN
-                            </label>
+                            <?php 
+                                $descOpt = array(
+                                    'HADIR' => 'HADIR',
+                                    'ALPA' => 'ALPA',
+                                    'SAKIT' => 'SAKIT',
+                                    'IJIN' => 'IJIN',
+                                );
+                                echo form_dropdown('keterangan['. $member->id_siswa .']', $descOpt, 'HADIR');
+                            ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
