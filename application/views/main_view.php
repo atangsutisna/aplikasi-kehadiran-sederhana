@@ -68,7 +68,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <img src="<?php echo base_url() ?>img/avatar5.png" class="user-image" alt="User Image"><br/>
                 <p>
                   <?php echo $this->session->userdata('staff_name') ?>
-                  <small>STAFF</small>
+                  <small><?php echo $this->session->userdata('role') ?></small>
                 </p>
               </li>
               <!-- Menu Footer-->

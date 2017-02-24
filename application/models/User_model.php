@@ -58,7 +58,7 @@ class User_model extends CI_Model {
     public function get_user_info_from_staff($username) 
     {
         $result = $this->db->query("
-            SELECT staff.nama, pengguna.peran FROM pengguna 
+            SELECT staff.nama, peran FROM pengguna 
             INNER JOIN staff 
             ON (pengguna.id_pengguna = staff.id)
             WHERE staff.status = 'AKTIF'
@@ -70,7 +70,7 @@ class User_model extends CI_Model {
     public function get_user_info_from_siswa($username) 
     {
         $result = $this->db->query("
-            SELECT siswa.nama_lengkap AS nama, pengguna.peran FROM pengguna
+            SELECT siswa.nama_lengkap AS nama, peran FROM pengguna
             INNER JOIN siswa
             ON (pengguna.id_pengguna = siswa.id)
             AND

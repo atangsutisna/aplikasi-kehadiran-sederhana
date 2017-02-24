@@ -146,11 +146,48 @@ class Student_presence extends CI_Controller {
                 $this->presence_model->insert_batch_into('kehadiran_siswa', $data);    
             }
             
-            redirect('student_presence');	        
+            $group_id = $this->input->post('id_kelas');
+            redirect('student_presence/view/'. $group_id);	        
         } catch (Exception $e) {
 			$this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));			            
         }
         
+    }
+    
+    public function view($group_id) 
+    {
+        //code move here
+        $this->load->model('presence_model');
+        // cara ini jelek, bisa langsung pake query
+        $count_hadir = 0;
+        $count_alpa = 0;
+        $count_sakit = 0;
+        $count_ijin = 0;
+        $group_members = $this->presence_model->find_all_by_group_and_date($group_id, date('Y-m-d'));
+        foreach ($group_members as $value) {
+            if ($value->keterangan == 'HADIR') {
+                $count_hadir++;
+            }
+            if ($value->keterangan == 'ALPA') {
+                $count_alpa++;
+            }
+            if ($value->keterangan == 'SAKIT') {
+                $count_sakit++;
+            }
+            if ($value->keterangan == 'IJIN') {
+                $count_ijin++;
+            }
+        }
+        
+        $data = array(
+            'count_hadir' => $count_hadir,
+            'count_alpa' => $count_alpa,
+            'count_sakit' => $count_sakit,
+            'count_ijin' => $count_ijin,
+            'group_members' => $group_members,
+            'content_view' => 'studentpresence/view'
+        );
+        $this->load->view('main_view', $data);
     }
     
 }
