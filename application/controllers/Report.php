@@ -138,20 +138,35 @@ class Report extends CI_Controller {
         }
     }
     
-    public function test() 
+    public function print_csv_staff_report() 
     {
-        $filename = "example";
+        $year = $this->input->post('year');
+        $month = $this->input->post('month');
+        $filename = "rekap_absensi_staff";
 
         header("Content-type: text/csv");
         header("Content-Disposition: attachment; filename={$filename}.csv");
         header("Pragma: no-cache");
         header("Expires: 0");
         
-        $data = array(
-                array( 'row_1_col_1', 'row_1_col_2', 'row_1_col_3' ),
-                array( 'row_2_col_1', 'row_2_col_2', 'row_2_col_3' ),
-                array( 'row_3_col_1', 'row_3_col_2', 'row_3_col_3' ),
-            );        
+        $data = array(array( 'No', 'NIP', 'Nama', 'Jabatan', 'Hadir', 'Alpa', 'Ijin', 'Sakit' ));
+        $yearmonth;
+        if ($month < 10) {
+            $yearmonth = $year.'0'.$month;
+        } else {
+            $yearmonth = $year.$month;                
+        }
+        
+        $contents = $this->presence_model->show_staff_report_by_yearmonth($yearmonth);
+        $i = 1;
+        foreach ($contents as $content) {
+            $data[] = array($i, $content->nip,  $content->nama_lengkap, $content->nama_jabatan, 
+            $content->count_hadir, $content->count_alpa, $content->count_ijin, $content->count_sakit);
+            $i++;
+        }
+        
+        //var_dump($data);
+
         $outputBuffer = fopen("php://output", 'w');
         foreach($data as $val) {
             fputcsv($outputBuffer, $val);
