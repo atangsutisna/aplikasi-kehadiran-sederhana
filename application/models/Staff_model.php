@@ -32,7 +32,7 @@ class Staff_model extends CI_Model
     
     public function find_all_by_position($id_position, $order_by = 'nama', $order_desc = 'asc') 
     {
-        $sql = "SELECT staff.*, pos.nama_jabatan FROM staff LEFT JOIN jabatan ON staff.id_jabatan = jabatan.id ";
+        $sql = "SELECT staff.*, jabatan.nama_jabatan FROM staff LEFT JOIN jabatan ON staff.id_jabatan = jabatan.id ";
         if ($id_position != null) {
             $sql .= "WHERE staff.id_jabatan = ? ";
         }
