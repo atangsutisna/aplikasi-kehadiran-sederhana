@@ -65,7 +65,5 @@
         <?php echo form_close() ?>
       </div>
   </div>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
 </div>
+<p>&nbsp;</p>
