@@ -1,6 +1,7 @@
 <div class="col-lg-12">
     <div class="box box-info">
       <div class="box-header with-border">
+          Tanggal: <?php echo date('d/m/Y') ?><br>
           RINGKASAN ABSENSI STAFF <b>HADIR:</b> <?php echo $count_hadir ?>, <b>ALPA</b> <?php echo $count_alpa ?>
           <b>SAKIT:</b> <?php echo $count_sakit ?>  <b>IJIN:</b> <?php echo $count_ijin ?>
           <div class="box-tools">
