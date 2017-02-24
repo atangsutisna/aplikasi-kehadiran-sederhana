@@ -29,14 +29,14 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-2 control-label">Nama Staff</label>
+              <label class="col-sm-2 control-label">Nama Staff/Guru</label>
               <div class="col-sm-5">
                 <?php
-                  $staffOpt = array('0' => 'Pilih Staff');
-                  foreach($staffs as $staff) {
-                    $staffOpt[$staff->id] = $staff->nama;  
+                  $userOpt = array('0' => 'Pilih Staff');
+                  foreach($users as $row) {
+                    $userOpt[$row->id] = $row->nama;  
                   }
-                  echo form_dropdown('id_pengguna', $staffOpt, isset($user) ? $user->id_pengguna : '0');
+                  echo form_dropdown('id_pengguna', $userOpt, isset($user) ? $user->id_pengguna : '0');
                 ?>              
               </div>
             </div>   

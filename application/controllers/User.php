@@ -44,8 +44,14 @@ class User extends CI_Controller {
 	        	throw new Exception("Access Denied");
 	        }  
 	        
+	        $query = $this->db->query("
+	        	SELECT id, nama FROM staff WHERE status = 'AKTIF'
+	        	UNION
+	        	SELECT id, nama_lengkap AS nama FROM siswa
+	        ");
+	        
 		    $data = array(
-		        'staffs' => $this->staff_model->find_all_active(),
+		        'users' => $query->result(),
 		        'content_view' => 'user/form'
 		    );
 		    
