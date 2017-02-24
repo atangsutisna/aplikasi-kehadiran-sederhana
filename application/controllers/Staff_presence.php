@@ -89,10 +89,44 @@ class Staff_presence extends CI_Controller {
                 $this->presence_model->insert_batch_into('kehadiran_staff', $data);    
             }
             
-            redirect('staff_presence');	        
+            redirect('staff_presence/view_current_date');	        
         } catch (Exception $e) {
             $this->load->view('main_view', array('content_view' => 'errors/html/access_denied'));		
         }
     }    
+    
+    public function view_current_date() 
+    {
+        $count_hadir = 0;
+        $count_alpa = 0;
+        $count_sakit = 0;
+        $count_ijin = 0;
+        $group_members = $this->presence_model->view_all_by_date(date('Y-m-d'));
+        foreach ($group_members as $value) {
+            if ($value->keterangan == 'HADIR') {
+                $count_hadir++;
+            }
+            if ($value->keterangan == 'ALPA') {
+                $count_alpa++;
+            }
+            if ($value->keterangan == 'SAKIT') {
+                $count_sakit++;
+            }
+            if ($value->keterangan == 'IJIN') {
+                $count_ijin++;
+            }
+        }
+        
+        $data = array(
+            'count_hadir' => $count_hadir,
+            'count_alpa' => $count_alpa,
+            'count_sakit' => $count_sakit,
+            'count_ijin' => $count_ijin,
+            'group_members' => $group_members,
+            'content_view' => 'staffpresence/view'
+        );
+        
+        $this->load->view('main_view', $data);        
+    }
     
 }
