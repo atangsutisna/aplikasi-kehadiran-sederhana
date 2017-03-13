@@ -272,5 +272,55 @@ class Presence_model extends CI_Model
         return $result->result();
     }
 
-    
+    public function show_staff_report_by_daterange($start_date, $end_date)
+    {
+        $result = $this->db->query("
+            SELECT staff.id,nip, nama AS nama_lengkap, jabatan.nama_jabatan, 
+            case when counter_hadir.count_hadir is null then 0 else counter_hadir.count_hadir end as count_hadir,
+            case when counter_alpa.count_alpa is null then 0 else counter_alpa.count_alpa end as count_alpa,
+            case when counter_sakit.count_sakit is null then 0 else counter_sakit.count_sakit end as count_sakit,
+            case when counter_ijin.count_ijin is null then 0 else counter_ijin.count_ijin end as count_ijin
+            FROM staff
+            LEFT JOIN jabatan 
+            ON staff.id_jabatan = jabatan.id
+            LEFT JOIN (
+                SELECT id_staff, count(*) as count_hadir
+                FROM kehadiran_staff
+                WHERE keterangan = 'HADIR'
+                AND tanggal >= ? AND tanggal <= ?
+                GROUP BY id_staff
+            ) counter_hadir
+            ON staff.id = counter_hadir.id_staff        
+            LEFT JOIN (
+                SELECT id_staff, count(*) as count_alpa
+                FROM kehadiran_staff
+                WHERE keterangan = 'ALPA'
+                AND tanggal >= ? AND tanggal <= ?
+                GROUP BY id_staff
+            ) counter_alpa
+            ON staff.id = counter_alpa.id_staff        
+            LEFT JOIN (
+                SELECT id_staff, count(*) as count_sakit
+                FROM kehadiran_staff
+                WHERE keterangan = 'SAKIT'
+                AND tanggal >= ? AND tanggal <= ?
+                GROUP BY id_staff
+            ) counter_sakit
+            ON staff.id = counter_sakit.id_staff        
+            LEFT JOIN (
+                SELECT id_staff, count(*) as count_ijin
+                FROM kehadiran_staff
+                WHERE keterangan = 'IJIN'
+                AND tanggal >= ? AND tanggal <= ?
+                GROUP BY id_staff
+            ) counter_ijin
+            ON staff.id = counter_ijin.id_staff        
+            WHERE staff.status = 'AKTIF'
+        ", array($start_date, $end_date, 
+                 $start_date, $end_date,
+                 $start_date, $end_date,
+                 $start_date, $end_date));
+        return $result->result();
+    }
+   
 }

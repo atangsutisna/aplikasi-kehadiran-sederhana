@@ -238,7 +238,26 @@ class Report extends CI_Controller {
     
     public function staff_daily() 
     {
+        $this->load->view('main_view', array(
+            'content_view' => 'report/staff_daily_report',
+            'staffs' => []
+        ));        
+    }
+
+    public function staff_daily_report() 
+    {
+        $start_date = DateTime::createFromFormat('d/m/Y', 
+            $this->input->post('start_date'));
+        $end_date = DateTime::createFromFormat('d/m/Y', 
+            $this->input->post('end_date'));
+            
+        $staffs = $this->presence_model->show_staff_report_by_daterange($start_date->format('Y-m-d'), 
+            $end_date->format('Y-m-d'));
         
+        $this->load->view('main_view', array(
+            'content_view' => 'report/staff_daily_report',
+            'staffs' => $staffs
+        ));        
     }
 
 }
