@@ -32,6 +32,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <!-- jQuery 2.2.3 -->
+  <script src="<?php echo base_url() ?>js/jquery-2.2.3.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="<?php echo base_url() ?>js/app.min.js"></script>
+  
+  <script src="<?php echo base_url() ?>js/datepicker/bootstrap-datepicker.js"></script>
+  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -120,14 +129,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li><a href="<?php echo base_url() ?>index.php/student_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Siswa</span></a></li>
         <li><a href="<?php echo base_url() ?>index.php/staff_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Staff</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan</span>
+          <a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan Absensi Siswa</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><?php echo anchor('report/student', 'Absensi Siswa') ?></li>
-            <li><?php echo anchor('report/staff', 'Absensi Staff') ?></li>
+            <li><?php echo anchor('report/student', 'Rekap Bulanan') ?></li>
+            <li><?php echo anchor('report/student_daily', 'Rekap Harian') ?></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan Absensi Staff</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><?php echo anchor('report/staff', 'Rekap Bulanan') ?></li>
+            <li><?php echo anchor('report/staff_daily', 'Rekap Harian') ?></li>
           </ul>
         </li>
       </ul>
@@ -252,29 +272,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
-<!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url() ?>js/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url() ?>js/app.min.js"></script>
-<!--
-<script src="<?php //echo base_url() ?>js/datepicker/bootstrap-datepicker.js"></script>
--->
-<!-- only for report -->
-<script type="text/javascript">
-//$('#yearpicker').monthpicker();
-/**
-  $(document).ready(function(){
-    console.info('attempting to load datepicker');
-    $('#dpMonths').datepicker();
-    console.info('setelahnya');
-  });**/
-  
-</script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the

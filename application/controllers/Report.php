@@ -211,5 +211,34 @@ class Report extends CI_Controller {
         
         fclose($outputBuffer);
     }    
+    
+    public function student_daily() 
+    {
+         $this->load->view('main_view', array(
+            'content_view' => 'report/student_daily_report',
+            'students' => []
+        ));        
+    }
+    
+    public function student_daily_report() 
+    {
+        $start_date = DateTime::createFromFormat('d/m/Y', 
+            $this->input->post('start_date'));
+        $end_date = DateTime::createFromFormat('d/m/Y', 
+            $this->input->post('end_date'));
+            
+        $students = $this->presence_model->show_student_report_by_daterange($start_date->format('Y-m-d'), 
+            $end_date->format('Y-m-d'));
+            
+        $this->load->view('main_view', array(
+            'content_view' => 'report/student_daily_report',
+            'students' => $students
+        )); 
+    }
+    
+    public function staff_daily() 
+    {
+        
+    }
 
 }

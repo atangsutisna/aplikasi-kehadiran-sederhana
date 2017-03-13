@@ -203,4 +203,74 @@ class Presence_model extends CI_Model
         return $result->result();
     }
     
+    public function show_student_report_by_daterange($start_date, $end_date)
+    {
+        $result = $this->db->query("
+            select 
+            siswa.nomor_induk, 
+            siswa.nama_lengkap, 
+            kelas.nama_kelas,
+            case when counter_attendance.count is null then 0 else counter_attendance.count end as count_hadir,
+            case when counter_alpa.count is null then 0 else counter_alpa.count end as count_alpa,
+            case when counter_sakit.count is null then 0 else counter_sakit.count end count_sakit,
+            case when counter_ijin.count is null then 0 else counter_ijin.count end count_ijin
+            from siswa
+            inner join (
+                select 
+                id_siswa,
+                kelas.nama_kelas
+                from anggota_kelas
+                left join kelas
+                on anggota_kelas.id_kelas = kelas.id
+            ) kelas
+            on siswa.id = kelas.id_siswa
+            left join (
+                select 
+                id_siswa,
+                count(*) as count
+                from kehadiran_siswa
+                where keterangan = 'HADIR'
+                and tanggal >= ? and tanggal <= ?
+                group by id_siswa
+            ) counter_attendance
+            on siswa.id = counter_attendance.id_siswa
+            left join (
+                select 
+                id_siswa,
+                count(*) as count
+                from kehadiran_siswa
+                where keterangan = 'ALPA'
+                and tanggal >= ? and tanggal <= ?
+                group by id_siswa
+            ) counter_alpa
+            on siswa.id = counter_alpa.id_siswa
+            left join (
+                select 
+                id_siswa,
+                count(*) as count
+                from kehadiran_siswa
+                where keterangan = 'SAKIT'
+                and tanggal >= ? and tanggal <= ?
+                group by id_siswa
+            ) counter_sakit
+            on siswa.id = counter_sakit.id_siswa
+            left join (
+                select 
+                id_siswa,
+                count(*) as count
+                from kehadiran_siswa
+                where keterangan = 'IJIN'
+                and tanggal >= ? and tanggal <= ?
+                group by id_siswa
+            ) counter_ijin
+            on siswa.id = counter_ijin.id_siswa
+        ", array($start_date, $end_date, 
+                 $start_date, $end_date,
+                 $start_date, $end_date,
+                 $start_date, $end_date));
+        
+        return $result->result();
+    }
+
+    
 }
