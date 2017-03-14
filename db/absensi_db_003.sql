@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2017 at 09:34 AM
+-- Generation Time: Mar 14, 2017 at 06:41 PM
 -- Server version: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -31,15 +31,16 @@ CREATE TABLE IF NOT EXISTS `anggota_kelas` (
   `id_kelas` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `anggota_kelas`
 --
 
 INSERT INTO `anggota_kelas` (`id`, `id_kelas`, `id_siswa`) VALUES
-(7, 6, 2),
-(8, 6, 8);
+(8, 6, 8),
+(9, 6, 9),
+(10, 8, 10);
 
 -- --------------------------------------------------------
 
@@ -77,15 +78,17 @@ CREATE TABLE IF NOT EXISTS `kehadiran_siswa` (
   `tanggal` date NOT NULL,
   `id_operator` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `kehadiran_siswa`
 --
 
 INSERT INTO `kehadiran_siswa` (`id`, `id_siswa`, `keterangan`, `tanggal`, `id_operator`) VALUES
-(11, 2, 'HADIR', '2017-02-24', 21),
-(12, 8, 'ALPA', '2017-02-24', 21);
+(13, 8, 'HADIR', '2017-02-24', 21),
+(14, 9, 'HADIR', '2017-02-24', 21),
+(15, 8, 'HADIR', '2017-03-13', 21),
+(16, 9, 'HADIR', '2017-03-13', 21);
 
 -- --------------------------------------------------------
 
@@ -107,8 +110,8 @@ CREATE TABLE IF NOT EXISTS `kehadiran_staff` (
 --
 
 INSERT INTO `kehadiran_staff` (`id`, `id_staff`, `keterangan`, `tanggal`, `id_operator`) VALUES
-(14, 19, 'HADIR', '2017-02-24', 21),
-(15, 21, 'ALPA', '2017-02-24', 21),
+(14, 19, 'HADIR', '2017-02-24', 0),
+(15, 21, 'ALPA', '2017-02-24', 0),
 (16, 22, 'ALPA', '2017-02-24', 21);
 
 -- --------------------------------------------------------
@@ -161,6 +164,9 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `username`, `password`, `peran`, `status`, `terakhir_loggedin`) VALUES
+(8, 'user', '123456', 'USER', 1, '0000-00-00'),
+(12, 'burok', '12345', 'USER', 1, '0000-00-00'),
+(19, 'rahman', '12345', 'USER', 1, '0000-00-00'),
 (21, 'admin', 'admin', 'ADMINISTRATOR', 1, '0000-00-00'),
 (24, 'staff', 'staff', 'STAFF', 1, '0000-00-00');
 
@@ -181,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `delete_action` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_index` (`role`,`module_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `roles`
@@ -203,7 +209,15 @@ INSERT INTO `roles` (`id`, `role`, `module_id`, `module_name`, `create_action`, 
 (13, 'STAFF', 'siswa', 'Siswa', 0, 0, 0, 0),
 (14, 'STAFF', 'staff', 'Staff', 0, 0, 0, 0),
 (15, 'ADMINISTRATOR', 'role', 'Hak Akses', 1, 1, 1, 1),
-(16, 'STAFF', 'role', 'Hak Akses', 0, 0, 0, 0);
+(16, 'STAFF', 'role', 'Hak Akses', 0, 0, 0, 0),
+(17, 'USER', 'absensi_siswa', 'Absensi Siswa', 0, 0, 0, 0),
+(18, 'USER', 'absensi_staff', 'Absensi Staff', 0, 0, 0, 0),
+(19, 'USER', 'kelas', 'Kelas', 0, 0, 0, 0),
+(20, 'USER', 'laporan', 'Laporan', 0, 1, 0, 0),
+(21, 'USER', 'pengguna', 'Pengguna', 0, 0, 0, 0),
+(22, 'USER', 'siswa', 'Siswa', 0, 0, 0, 0),
+(23, 'USER', 'staff', 'Staff', 0, 0, 0, 0),
+(24, 'USER', 'role', 'Hak Akses', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -219,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `siswa` (
   `jenis_kelamin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nomor_induk` (`nomor_induk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `siswa`
@@ -227,7 +241,9 @@ CREATE TABLE IF NOT EXISTS `siswa` (
 
 INSERT INTO `siswa` (`id`, `nomor_induk`, `nama_lengkap`, `alamat`, `jenis_kelamin`) VALUES
 (8, '100000001', 'Basuki Cahaya ', 'Alamat ahok', 1),
-(9, '6123', 'Steven', 'Indo', 1);
+(9, '6123', 'Steven', 'Indo', 1),
+(10, '12', 'Alamsyah', 'Serang', 1),
+(12, '2332', 'burok', 'bomm', 1);
 
 -- --------------------------------------------------------
 
@@ -246,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `status` enum('AKTIF','NON_AKTIF','VOID','') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nip` (`nip`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `staff`
@@ -257,7 +273,9 @@ INSERT INTO `staff` (`id`, `nip`, `nama`, `alamat`, `id_jabatan`, `jenis_kelamin
 (21, '10002', 'Stevan', 'alamat ali', 1, 1, 'S1', 'AKTIF'),
 (22, '3434343', 'test', 'ini test', 4, 1, 'SMA', 'NON_AKTIF'),
 (23, '1000101', 'testing lagi', 'asdf', 3, 1, 'S1', 'NON_AKTIF'),
-(24, '764', 'Ervan', 'Indo', 3, 1, 'SMA', 'AKTIF');
+(24, '764', 'Ervan', 'Indo', 3, 1, 'SMA', 'AKTIF'),
+(25, '132343555', 'burnok', 'cihideng', 4, 0, 'SD', 'VOID'),
+(26, '2345', 'vlenevw2345', 'akdud', 4, 0, 'S1', 'NON_AKTIF');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
