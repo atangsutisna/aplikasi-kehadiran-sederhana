@@ -68,74 +68,43 @@ class Report extends CI_Controller {
     
     public function print_pdf_student_report()
     {
-        try {
-            $month = $this->input->post('month');
-            $year = $this->input->post('year');
-            $yearmonth;
-            if ($month < 10) {
-                $yearmonth = $year.'0'.$month;
-            } else {
-                $yearmonth = $year.$month;                
-            }
-            
-            // create an API client instance
-            $client = new Pdfcrowd("atang", "e2a89092c8b140255a6521f87ce51407");
-            // convert a web page and store the generated PDF into a $pdf variable
-            $pdf = $client->convertURI(base_url(). 'index.php/report/student_report_pdf_template/'. $yearmonth);
-            // set HTTP response headers
-            header("Content-Type: application/pdf");
-            header("Cache-Control: max-age=0");
-            header("Accept-Ranges: none");
-            header("Content-Disposition: attachment; filename=\"student_presence_report.pdf\"");
-            // send the generated PDF 
-            echo $pdf;            
-        } catch (PdfcrowdException $why) {
-            echo "Pdfcrowd Error: " . $why;
+        $month = $this->input->post('month');
+        $year = $this->input->post('year');
+        $yearmonth;
+        if ($month < 10) {
+            $yearmonth = $year.'0'.$month;
+        } else {
+            $yearmonth = $year.$month;                
         }
-    }
-    
-    public function student_report_pdf_template($yearmonth) 
-    {
-        $this->load->view('report/student_table', array(
+        
+        $this->load->library('pdf');
+        
+        $data = array(
             'current_date' => date('d/m/Y'),
             'students' => $this->presence_model->show_student_report_by_yearmonth($yearmonth)
-        )); 
+        );
+        $file_name = 'student-report';
+        $this->pdf->load_view('report/student_table', $data, $file_name);
     }
     
-    public function staff_report_pdf_template($yearmonth) 
-    {
-        $this->load->view('report/staff_table', array(
-            'current_date' => date('d/m/Y'),
-            'staffs' => $this->presence_model->show_staff_report_by_yearmonth($yearmonth),
-        ));        
-    }
-
     public function print_pdf_staff_report()
     {
-        try {
-            $month = $this->input->post('month');
-            $year = $this->input->post('year');
-            $yearmonth;
-            if ($month < 10) {
-                $yearmonth = $year.'0'.$month;
-            } else {
-                $yearmonth = $year.$month;                
-            }
-            
-            // create an API client instance
-            $client = new Pdfcrowd("atang", "e2a89092c8b140255a6521f87ce51407");
-            // convert a web page and store the generated PDF into a $pdf variable
-            $pdf = $client->convertURI(base_url(). 'index.php/report/staff_report_pdf_template/'. $yearmonth);
-            // set HTTP response headers
-            header("Content-Type: application/pdf");
-            header("Cache-Control: max-age=0");
-            header("Accept-Ranges: none");
-            header("Content-Disposition: attachment; filename=\"student_presence_report.pdf\"");
-            // send the generated PDF 
-            echo $pdf;            
-        } catch (PdfcrowdException $why) {
-            echo "Pdfcrowd Error: " . $why;
+        $month = $this->input->post('month');
+        $year = $this->input->post('year');
+        $yearmonth;
+        if ($month < 10) {
+            $yearmonth = $year.'0'.$month;
+        } else {
+            $yearmonth = $year.$month;                
         }
+        
+        $this->load->library('pdf');
+        $data = array(
+            'current_date' => date('d/m/Y'),
+            'staffs' => $this->presence_model->show_staff_report_by_yearmonth($yearmonth),
+        );
+        $file_name = 'staff-report';
+        $this->pdf->load_view('report/staff_table', $data, $file_name);        
     }
     
     public function print_csv_staff_report() 

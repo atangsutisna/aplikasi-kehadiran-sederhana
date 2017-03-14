@@ -9,7 +9,8 @@ class Test extends CI_Controller
     
     public function index() 
     {
-        $this->load->view('main_view');
+        $this->load->library('pdf');
+        $this->pdf->load_view('welcome_message');
     }
     
 }
