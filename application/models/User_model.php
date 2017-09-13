@@ -78,6 +78,14 @@ class User_model extends CI_Model {
         return $result->row();
     }
     
-    
+    public function find_all_candidate() {
+        $query = $this->db->query("
+	        	SELECT id, nama FROM staff WHERE status = 'AKTIF'
+	        	UNION
+	        	SELECT id, nama_lengkap AS nama FROM siswa
+	    ");
+	    
+	    return $query->result();
+     }
     
 }
