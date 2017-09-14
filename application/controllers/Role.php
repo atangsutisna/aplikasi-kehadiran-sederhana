@@ -12,18 +12,16 @@ class Role extends CI_Controller {
         	$this->session->set_flashdata('not_authorize', 'Not Authorize');
         	redirect('auth');
         }
-        $this->load->model(array('role_model'));
+        /** $this->load->model(array('role_manager')); **/
     }
     
     public function index()
 	{
 		try {
-	    	$user = $this->role_model->has_role(
+	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
-	    				Role::MODULE_NAME
-	    			);
-	    	
-	        if ($user->read_action == 0) {
+	    				Role::MODULE_NAME,
+	    				'read')) {
 	        	throw new Exception("Access Denied");
 	        }   
 	        //code here
@@ -44,18 +42,18 @@ class Role extends CI_Controller {
 	    }
 	 
 		try {
-	    	$user = $this->role_model->has_role(
+	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
-	    				Role::MODULE_NAME
-	    			);
-	        if ($user->update_action == 0) {
+	    				Role::MODULE_NAME,
+	    				'edit'
+	    			)) {
 	        	throw new Exception("Access Denied");
 	        }   
 	        //code here
-		    $roles = $this->role_model->find_all_by_role($role_name);
+		    $roles = $this->role_manager->find_all_by_role($role_name);
 			$data = array(
 			    'role_name' => $role_name,
-			    'roles' => $this->role_model->find_all_by_role($role_name),
+			    'roles' => $this->role_manager->find_all_by_role($role_name),
 		        'content_view' => 'role/form'
 		    );
 			$this->load->view('main_view', $data);	    
@@ -67,11 +65,11 @@ class Role extends CI_Controller {
 	public function update() 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
+	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
-	    				Role::MODULE_NAME
-	    			);
-	        if ($user->update_action == 0) {
+	    				Role::MODULE_NAME,
+	    				'update'
+	    			)) {
 	        	throw new Exception("Access Denied");
 	        }   
 	        //code here
@@ -85,7 +83,7 @@ class Role extends CI_Controller {
 	    	    $delete_actions = $this->input->post('delete_action') == NULL ? array() : $this->input->post('delete_action');
 	    	    
 	    	    $role_name = $this->input->post('role_name');
-	    	    $roles = $this->role_model->find_all_by_role($role_name);
+	    	    $roles = $this->role_manager->find_all_by_role($role_name);
 	    	    foreach ($roles as $role) {
 	    	        $role->create_action = !array_key_exists($role->module_id, $create_actions) ? FALSE : TRUE;
 	    	        $role->read_action = !array_key_exists($role->module_id, $read_actions) ? FALSE : TRUE;
@@ -93,7 +91,7 @@ class Role extends CI_Controller {
 	    	        $role->delete_action = !array_key_exists($role->module_id, $delete_actions) ? FALSE : TRUE;
 	    	    }
 	    	    
-	    	    $this->role_model->update_batch($roles);
+	    	    $this->role_manager->update_batch($roles);
 	    	    $this->session->set_flashdata('notif', 'Data sudah diubah');
 		    }
 		    

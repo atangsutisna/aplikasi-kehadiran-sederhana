@@ -15,13 +15,14 @@ class User extends CI_Controller {
     public function index() 
     {
     	try {
-	    	$user = $this->role_model->has_role(
+	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
-	    				USER::MODULE_NAME
-	    			);
-	        if ($user->read_action == 0) {
+	    				USER::MODULE_NAME,
+	    				'read'
+	    			)){
 	        	throw new Exception("Access Denied");
-	        }    		
+	        }    	
+	        
 			$data = array(
 	            'users' => $this->user_model->find_all(),
 		        'content_view' => 'user/view'
@@ -36,11 +37,10 @@ class User extends CI_Controller {
     public function new_form() 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
+	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
-	    				USER::MODULE_NAME
-	    			);
-	        if ($user == null || $user->create_action == 0) {
+	    				USER::MODULE_NAME,
+	    				'create')){
 	        	throw new Exception("Access Denied");
 	        }  
 	        
@@ -59,11 +59,11 @@ class User extends CI_Controller {
 	public function insert() 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
+	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
-	    				USER::MODULE_NAME
-	    			);
-	        if ($user == null || $user->create_action == 0) {
+	    				USER::MODULE_NAME,
+	    				'create'
+	    			)){
 	        	throw new Exception("Access Denied");
 	        }  
 		
@@ -149,11 +149,10 @@ class User extends CI_Controller {
 	public function edit($id) 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
+	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
-	    				USER::MODULE_NAME
-	    			);
-	        if ($user == null || $user->update_action == 0) {
+	    				USER::MODULE_NAME,
+	    				'edit')){
 	        	throw new Exception("Access Denied");
 	        }  
 			
