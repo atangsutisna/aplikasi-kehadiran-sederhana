@@ -44,7 +44,11 @@ class User_model extends CI_Model {
     public function check_username($username) 
     {
         $result = $this->db->query("SELECT 1 AS is_present FROM pengguna WHERE username = ?", array($username));
-        return $result->row();
+        if ($result->row() == NULL) {
+            return FALSE;
+        }
+
+        return $result->row()->is_present;
     }
     
     public function find_by_username($username) 

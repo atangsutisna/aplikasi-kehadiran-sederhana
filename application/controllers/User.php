@@ -97,8 +97,8 @@ class User extends CI_Controller {
 	
 	public function check_username($username) 
 	{
-		$result = $this->user_model->check_username($username);
-		if ($result->is_present) {
+		$uname_exist = $this->user_model->check_username($username);
+		if ($uname_exist) {
 			$this->form_validation->set_message('check_username', 'Duplicate {field}');
 			return FALSE;
 		} else {
