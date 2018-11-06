@@ -144,13 +144,13 @@ class Staff extends CI_Controller {
 	public function edit($id) 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Staff::MODULE_NAME
-	    			);
-	        if ($user->update_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Staff::MODULE_NAME,
+						'read')) {
+				throw new Exception("Access Denied");
+			}   
+
 			$data = array(
 					'positions' => $this->position_model->find_all(),
 					'staff' => $this->staff_model->find_one($id),
