@@ -38,13 +38,12 @@ class Student extends CI_Controller {
 	public function new_form() 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student::MODULE_NAME
-	    			);
-	        if ($user->read_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student::MODULE_NAME,
+						'create')) {
+				throw new Exception("Access Denied");
+			}   
 			
 			$this->load->view('main_view', array('content_view' => 'student/form'));						
 		} catch(Exception $e) {
@@ -85,13 +84,13 @@ class Student extends CI_Controller {
 	public function edit_student($id) 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student::MODULE_NAME
-	    			);
-	        if ($user->update_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student::MODULE_NAME,
+						'update')) {
+				throw new Exception("Access Denied");
+			}   
+
 	        
 			$student = $this->siswa_model->find_one($id);
 			$this->load->view('main_view', array(
@@ -123,14 +122,13 @@ class Student extends CI_Controller {
 	public function delete($id) 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student::MODULE_NAME
-	    			);
-	        if ($user->delete_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
-			
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student::MODULE_NAME,
+						'delete')) {
+				throw new Exception("Access Denied");
+			}   
+	
 			if (!isset($id)) {
 				$this->session->set_flashdata('notif', 'ID must not be null');
 				redirect('student');
