@@ -16,34 +16,46 @@
         ?>    
         <?php echo form_open('staff/filter', array('class' => 'form-horizontal')) ?>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Jabatan</label>
+                <label class="col-sm-3 control-label">Jabatan</label>
                 <div class="col-sm-4">
                     <?php
                     $posOpt = array('0' => 'Pilih Jabatan');
                     foreach ($positions as $item) {
                         $posOpt[$item->id] = $item->nama_jabatan;
                     }
-                    echo form_dropdown('id_jabatan', $posOpt, isset($selected_position_id) ? $selected_position_id : '0');
+                    echo form_dropdown('id_jabatan', $posOpt, 
+                        isset($selected_position_id) ? $selected_position_id : '0', 
+                        ['class' => 'form-control']);
                     ?>                    
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Urut berdasarkan</label>
-                <div class="col-sm-4">
-                <?php
-                    $orderByOpt = array(
-                        'nip' => 'NIP',
-                        'nama' => 'Nama',
-                        'nama_jabatan' => 'Jabatan'
-                    );
-                    echo form_dropdown('order_by', $orderByOpt, isset($selected_order_by) ? $selected_order_by : 'nama');
-                    $order_desc = array('asc' => 'ASC', 'desc' => 'DESC');
-                    echo form_dropdown('order_desc', $order_desc, isset($selected_order_desc) ? $selected_order_desc : 'asc');
-                ?>
+                <label class="col-sm-3 control-label">Urut berdasarkan</label>
+                <div class="col-sm-8">
+                    <div class="col-sm-4" style="padding-left: 0px;">
+                        <?php
+                            $orderByOpt = array(
+                                'nip' => 'NIP',
+                                'nama' => 'Nama',
+                                'nama_jabatan' => 'Jabatan'
+                            );
+                            echo form_dropdown('order_by', $orderByOpt, 
+                                isset($selected_order_by) ? $selected_order_by : 'nama', 
+                                ['class' => 'form-control']);
+                        ?>
+                    </div>
+                    <div class="col-sm-4" style="padding-left: 5px;">
+                        <?php
+                            $order_desc = array('asc' => 'ASC', 'desc' => 'DESC');
+                            echo form_dropdown('order_desc', $order_desc, 
+                                isset($selected_order_desc) ? $selected_order_desc : 'asc', 
+                                ['class' => 'form-control']);
+                        ?>
+                    </div>
                 </div>
             </div>                
             <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
+              <div class="col-sm-offset-3 col-sm-10">
                 <button type="submit" class="btn btn-primary">Tampilkan</button>
               </div>
             </div>            
