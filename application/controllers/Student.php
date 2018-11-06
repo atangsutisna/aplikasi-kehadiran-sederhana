@@ -16,15 +16,13 @@ class Student extends CI_Controller {
     
 	public function index()
 	{
-		
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student::MODULE_NAME
-	    			);
-	        if ($user->read_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student::MODULE_NAME,
+						'read')) {
+				throw new Exception("Access Denied");
+			}   
 
 			$students = $this->siswa_model->find_all();
 			$data = array(
