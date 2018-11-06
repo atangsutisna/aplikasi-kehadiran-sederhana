@@ -45,7 +45,7 @@ class Role extends CI_Controller {
 	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
 	    				Role::MODULE_NAME,
-	    				'edit'
+	    				'read'
 	    			)) {
 	        	throw new Exception("Access Denied");
 	        }   

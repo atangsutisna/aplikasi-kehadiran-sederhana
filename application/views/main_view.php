@@ -121,13 +121,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu">
         <li class="header">MENU UTAMA</li>
         <!-- Optionally, you can add icons to the links -->
-        <li><a href="<?php echo base_url() ?>index.php/user"><i class="fa fa-circle-o text-aqua"></i> <span>Pengguna</span></a></li>
-        <li><a href="<?php echo base_url() ?>index.php/role"><i class="fa fa-circle-o text-aqua"></i> <span>Peran</span></a></li>
-        <li><a href="<?php echo base_url() ?>index.php/staff"><i class="fa fa-circle-o text-aqua"></i> <span>Staff</span></a></li>
-        <li><a href="<?php echo base_url() ?>index.php/student"><i class="fa fa-circle-o text-aqua"></i> <span>Siswa</span></a></li>
-        <li><a href="<?php echo base_url() ?>index.php/student_group"><i class="fa fa-circle-o text-aqua"></i> <span>Kelas</span></a></li>
-        <li><a href="<?php echo base_url() ?>index.php/student_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Siswa</span></a></li>
-        <li><a href="<?php echo base_url() ?>index.php/staff_presence"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Staff</span></a></li>
+        <li><a href="<?php echo site_url('user') ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Pengguna</span></a></li>
+        <li><a href="<?php echo site_url('role') ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Peran</span></a></li>
+        <li><a href="<?php echo site_url('staff') ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Staff</span></a></li>
+        <li><a href="<?php echo site_url('student') ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Siswa</span></a></li>
+        <li><a href="<?php echo site_url('student_group') ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Kelas</span></a></li>
+        <li><a href="<?php echo site_url('student_presence') ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Siswa</span></a></li>
+        <li><a href="<?php echo site_url('staff_presence') ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Absensi Staff</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Laporan Absensi Siswa</span>
             <span class="pull-right-container">
