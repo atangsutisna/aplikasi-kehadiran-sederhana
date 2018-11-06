@@ -85,7 +85,7 @@
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">Jabatan</label>
-          <div class="col-sm-5">
+          <div class="col-sm-3">
             <?php
               $postOption = array(
                   '0' => 'Pilih Jabatan',
@@ -94,7 +94,9 @@
                 $postOption[$item->id] = $item->nama_jabatan;
               } 
               
-              echo form_dropdown('id_jabatan', $postOption, isset($staff) ? $staff->id_jabatan : '0');
+              echo form_dropdown('id_jabatan', $postOption, 
+                isset($staff) ? $staff->id_jabatan : '0', 
+                ['class' => 'form-control']);
             ?>
           </div>
         </div>
@@ -157,14 +159,14 @@
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">Status</label>
-          <div class="col-sm-5">
+          <div class="col-sm-2">
             <?php
               $statusOpt = array(
                 'AKTIF' => 'AKTIF',
                 'NON_AKTIF' => 'NON AKTIF',
                 'VOID' => 'VOID'
               );
-              echo form_dropdown('status', $statusOpt, 'AKTIF');
+              echo form_dropdown('status', $statusOpt, 'AKTIF', ['class' => 'form-control']);
             ?>
           </div>
         </div>
