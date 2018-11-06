@@ -20,7 +20,7 @@ class Staff_presence extends CI_Controller {
     public function index() 
     {
         try {
-	    	$user = $this->role_model->has_role(
+	    	$user = $this->role_manager->has_role(
 	    				$this->session->userdata('role'), 
 	    				Staff_presence::MODULE_NAME
 	    			);

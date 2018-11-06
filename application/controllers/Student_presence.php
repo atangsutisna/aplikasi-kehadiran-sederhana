@@ -20,13 +20,13 @@ class Student_presence extends CI_Controller {
     public function index() 
     {
         try {
-	    	$user = $this->role_model->has_role(
+	    	if (!$this->role_manager->is_permitted(
 	    				$this->session->userdata('role'), 
-	    				Student_presence::MODULE_NAME
-	    			);
-	        if ($user->read_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+                        Student_presence::MODULE_NAME,
+                        'read'
+	    			)) {
+                throw new Exception("Access Denied");
+            }
 	
             $data = array(
                 'tahun_ajaran' => $this->stdgroup_model->find_all_tahun_ajaran(),
