@@ -44,15 +44,15 @@ class Student_presence extends CI_Controller {
     public function show_group() 
     {
         try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_presence::MODULE_NAME
-	    			);
-	        if ($user->read_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
 	        //code move here
-	        
+	    	if (!$this->role_manager->is_permitted(
+                        $this->session->userdata('role'), 
+                        Student_presence::MODULE_NAME,
+                        'read'
+                    )) {
+                throw new Exception("Access Denied");
+            }
+    
             $post_tahun_ajaran = $this->input->post('tahun_ajaran');
             $data = array(
                 'stdgroup' => $this->stdgroup_model->find_by_tahun_ajaran($post_tahun_ajaran),
@@ -70,13 +70,14 @@ class Student_presence extends CI_Controller {
     public function new_presence() 
     {
         try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_presence::MODULE_NAME
-	    			);
-	        if ($user->create_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+                        $this->session->userdata('role'), 
+                        Student_presence::MODULE_NAME,
+                        'create'
+                    )) {
+                throw new Exception("Access Denied");
+            }
+
 	        //code move here
             $post_tahun_ajaran = $this->input->post('tahun_ajaran');
             $post_id_kelas = $this->input->post('id_kelas');
