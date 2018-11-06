@@ -51,11 +51,9 @@ class Role_model extends CI_Model {
         
         switch ($action_name) {
             case 'create':
-                //var_dump($role->create_action == 1);
                 return $role->create_action == '1' ? true : false;
                 break;
             case 'read':
-                //var_dump($role->create_action == 1);
                 return $role->read_action == '1' ? true : false;
                 break;
             case 'update':
