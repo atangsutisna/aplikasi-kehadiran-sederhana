@@ -8,6 +8,7 @@
             <br/><br/>
         </div>
         <div class="box-body no-padding">
+            <br/>
             <?php 
               $formAttr = array("class" => "form-horizontal");
               echo !isset($user) ? form_open("user/insert", $formAttr) : form_open("user/update", $formAttr);
@@ -21,7 +22,7 @@
               }
             ?> 
             <div class="form-group">
-              <label class="col-sm-2 control-label">Username</label>
+              <label class="col-sm-3 control-label">Username</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control" placeholder="Username" name="username" 
                 value="<?php echo isset($user) ? $user->username : ""?>"
@@ -29,19 +30,20 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-2 control-label">Nama Staff/Guru</label>
+              <label class="col-sm-3 control-label">Nama Staff/Guru</label>
               <div class="col-sm-5">
                 <?php
                   $userOpt = array('0' => 'Pilih Staff');
                   foreach($users as $row) {
                     $userOpt[$row->id] = $row->nama;  
                   }
-                  echo form_dropdown('id_pengguna', $userOpt, isset($user) ? $user->id_pengguna : '0');
+                  echo form_dropdown('id_pengguna', $userOpt, 
+                    isset($user) ? $user->id_pengguna : '0', ['class' => 'form-control']);
                 ?>              
               </div>
             </div>   
             <div class="form-group">
-                <label class="col-sm-2 control-label">Peran</label>
+                <label class="col-sm-3 control-label">Peran</label>
                   <div class="col-sm-4">
                     <?php
                       $peranOpt = array(
@@ -50,24 +52,25 @@
                         'STAFF' => 'STAFF',
                         'USER' => 'USER'
                       );
-                      echo form_dropdown('peran', $peranOpt, isset($user) ? $user->peran : '0');
+                      echo form_dropdown('peran', $peranOpt, 
+                        isset($user) ? $user->peran : '0', ['class' => 'form-control']);
                     ?>
                   </div>
             </div>  
             <div class="form-group">
-              <label class="col-sm-2 control-label">Password</label>
+              <label class="col-sm-3 control-label">Password</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control" placeholder="Username" name="password">     
               </div>
             </div>            
             <div class="form-group">
-              <label class="col-sm-2 control-label">Retype Password</label>
+              <label class="col-sm-3 control-label">Retype Password</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control" placeholder="Username" name="retype_password">     
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
+              <div class="col-sm-offset-3 col-sm-10">
                 <button type="submit" class="btn btn-primary">Simpan</button>
               </div>
             </div>            

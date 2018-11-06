@@ -84,7 +84,7 @@ class User extends CI_Controller {
 	    	    redirect('user/new_form');
 		    } else {
 	    	    $data = array(
-	    	        'staffs' => $this->staff_model->find_all(),
+					'users' => $this->user_model->find_all_candidate(),
 	    	        'content_view' => 'user/form'
 	    	    );
 	    		$this->load->view('main_view', $data);			
