@@ -20,14 +20,13 @@ class Student_Group extends CI_Controller {
     public function index() 
     {
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_Group::MODULE_NAME
-	    			);
-	        if ($user->read_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
-	        
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student_Group::MODULE_NAME,
+						'read')) {
+				throw new Exception("Access Denied");
+			}   
+	
 	        $data = array(
 	            'groups' => $this->stdgroup_model->find_all(),
 		        'content_view' => 'studentgroup/view'
@@ -44,13 +43,13 @@ class Student_Group extends CI_Controller {
     public function new_form() 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_Group::MODULE_NAME
-	    			);
-	        if ($user->create_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student_Group::MODULE_NAME,
+						'create')) {
+				throw new Exception("Access Denied");
+			}   
+
 	        $data = array(
 	            'staffs' => $this->staff_model->find_all(),
 	            'groups' => $this->stdgroup_model->find_all(),
@@ -67,13 +66,13 @@ class Student_Group extends CI_Controller {
 	public function edit($id) 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_Group::MODULE_NAME
-	    			);
-	        if ($user->update_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student_Group::MODULE_NAME,
+						'update')) {
+				throw new Exception("Access Denied");
+			}   
+
 	        
 	        $data = array(
 	            'staffs' => $this->staff_model->find_all(),
@@ -90,13 +89,13 @@ class Student_Group extends CI_Controller {
     public function new_member($stdgroup_id) 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_Group::MODULE_NAME
-	    			);
-	        if ($user->create_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student_Group::MODULE_NAME,
+						'create')) {
+				throw new Exception("Access Denied");
+			}   
+
 			$this->load->model('siswa_model');
 			$data = array(
 				'stdgroup_id' => $stdgroup_id,
@@ -114,13 +113,13 @@ class Student_Group extends CI_Controller {
 	public function insert_new_member() 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_Group::MODULE_NAME
-	    			);
-	        if ($user->create_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student_Group::MODULE_NAME,
+						'create')) {
+				throw new Exception("Access Denied");
+			}   
+
 			//pindahin ke atas
 			$this->load->model('siswa_model');
 			$this->form_validation->set_rules('id_kelas', 'Nama Kelas', 'required');	
@@ -148,13 +147,13 @@ class Student_Group extends CI_Controller {
 	{
 		
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_Group::MODULE_NAME
-	    			);
-	        if ($user->delete_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student_Group::MODULE_NAME,
+						'delete')) {
+				throw new Exception("Access Denied");
+			}   
+
 		
 			$this->session->set_flashdata('notif', 'Data sudah dihapus');
 			$this->stdgroup_model->delete_member($member_id);
@@ -184,13 +183,13 @@ class Student_Group extends CI_Controller {
 	{
 		
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_Group::MODULE_NAME
-	    			);
-	        if ($user->create_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student_Group::MODULE_NAME,
+						'create')) {
+				throw new Exception("Access Denied");
+			}   
+
 			//pindahin ke atas
 			$this->form_validation->set_rules('nama_kelas', 'Nama Kelas', 'required');	
 			$this->form_validation->set_rules('tahun_ajaran', 'Tahun Ajaran', 'required');
@@ -219,13 +218,13 @@ class Student_Group extends CI_Controller {
     public function update() 
 	{
 		try {
-	    	$user = $this->role_model->has_role(
-	    				$this->session->userdata('role'), 
-	    				Student_Group::MODULE_NAME
-	    			);
-	        if ($user->update_action == 0) {
-	        	throw new Exception("Access Denied");
-	        }    		
+	    	if (!$this->role_manager->is_permitted(
+						$this->session->userdata('role'), 
+						Student_Group::MODULE_NAME,
+						'update')) {
+				throw new Exception("Access Denied");
+			}   
+
 			//pindahin ke atas
 			$this->form_validation->set_rules('nama_kelas', 'Nama Kelas', 'required');	
 			$this->form_validation->set_rules('tahun_ajaran', 'Tahun Ajaran', 'required');
