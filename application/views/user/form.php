@@ -27,6 +27,9 @@
                 <input type="text" class="form-control" placeholder="Username" name="username" 
                 value="<?php echo isset($user) ? $user->username : ""?>"
                 <?php echo isset($user) ? 'disabled' : '' ?>>
+                <!--
+                <span id="helpBlock2" class="help-block">                    
+                </span> -->
               </div>
             </div>
             <div class="form-group">
