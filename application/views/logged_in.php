@@ -19,7 +19,7 @@
         <a href="../../index2.html">Aplikasi <b>KEHADIRAN</b></a>
       </div>
       <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Silakan login</p>
         
         <?php if (validation_errors() != ''): ?>
         <div class="alert alert-warning alter-dismissible">
@@ -49,4 +49,6 @@
       </div>
     </div> <!--/login box -->
   </body>
+  <script src="<?php echo base_url('js/jquery-2.2.3.min.js') ?>"></script>
+  <script src="<?php echo base_url('js/jquery-2.2.3.min.js') ?>"></script>
 </html>
