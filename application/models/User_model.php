@@ -53,10 +53,9 @@ class User_model extends CI_Model {
     
     public function find_by_username($username) 
     {
-        $result = $this->db->query("
-            SELECT * FROM pengguna WHERE
-            username = ?", array($username));
-        return $result->row();
+        return $this->db->get_where('pengguna', [
+            'username' => $username
+        ])->row();
     }
     
     public function get_user_info_from_staff($username) 

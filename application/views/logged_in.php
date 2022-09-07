@@ -22,11 +22,11 @@
         <p class="login-box-msg">Sign in to start your session</p>
         <?php echo form_open('auth/session') ?>
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Username">
+            <input type="text" class="form-control" name="username" placeholder="Username">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" name="password" placeholder="Password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
