@@ -34,7 +34,6 @@ class Auth extends CI_Controller {
                     'role' => $user_info->peran,
                     'staff_name' => $user_info->nama
                 ));
-            //var_dump($this->session->userdata('staff_id'));    
            redirect('student_presence');
         }
     }
@@ -58,7 +57,8 @@ class Auth extends CI_Controller {
             return FALSE;
         } 
         
-        if ($userdata->password != $password) {
+        $password_verified = password_verify($password, $userdata->password);
+        if (!$password_verified) {
             $this->form_validation->set_message('check_username', 'Username and Password doest match!');
             return FALSE;
         } 

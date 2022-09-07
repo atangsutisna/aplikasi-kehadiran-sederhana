@@ -34,11 +34,10 @@ class User_model extends CI_Model {
         $this->db->insert('pengguna');
     }
 
-    public function update($username, $data) 
+    public function update($id_pengguna, $data) 
     {
-        $this->db->set($data);
-        $this->db->where('username', $username);
-        $this->db->update('pengguna');
+        $this->db->where('id_pengguna', $id_pengguna);
+        $this->db->update('pengguna', $data);
     }
 
     public function check_username($username) 
