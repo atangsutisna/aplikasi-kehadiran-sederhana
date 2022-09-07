@@ -11,11 +11,10 @@
 		"source": "https://github.com/bcit-ci/CodeIgniter"
 	},
 	"require": {
-		"php": ">=5.2.4"
+		"php": ">=5.2.4",
+		"vlucas/phpdotenv": "^3.6"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
-	},
-	"require-dev": {
 	}
 }
