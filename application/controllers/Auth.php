@@ -53,13 +53,13 @@ class Auth extends CI_Controller {
         $password = $this->input->post('password');
         
         if ($userdata == null) {
-            $this->form_validation->set_message('check_username', 'Invalid {field}');
+            $this->form_validation->set_message('check_username', 'Akun tidak diketahui atau password salah');
             return FALSE;
         } 
         
         $password_verified = password_verify($password, $userdata->password);
         if (!$password_verified) {
-            $this->form_validation->set_message('check_username', 'Username and Password doest match!');
+            $this->form_validation->set_message('check_username', 'Akun tidak diketahui atau password salah');
             return FALSE;
         } 
         
